@@ -190,6 +190,9 @@ const testimonials = [
       card.addEventListener('click', centerTestimonial as EventListener);
     });
 
+    // Start scrolling
+    startScrolling();
+
     // Cleanup function
     return () => {
       // Remove event listeners
