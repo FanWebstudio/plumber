@@ -21,21 +21,21 @@ const navItems: NavItem[] = [
     { href: "/about", text: "About" },
     { href: "/service", text: "Service" },
     { href: "/blog", text: "Blog" },
-    { href: "/contact", text: "Contact" }
+    { href: "/contact", text: "Contact" },
 ];
 
 const socialLinks: SocialLink[] = [
     { href: "#", icon: "far fa-envelope", label: "Send us an email" },
     { href: "#", icon: "fab fa-facebook-f", label: "Visit our Facebook page" },
     { href: "#", icon: "fab fa-instagram", label: "Follow us on Instagram" },
-    { href: "#", icon: "fab fa-twitter", label: "Follow us on Twitter" }
+    { href: "#", icon: "fab fa-twitter", label: "Follow us on Twitter" },
 ];
 
 const phoneNumber = "+1 071 281 9795";
 ---
 
-<header class="relative" role="banner">
-    <!-- Top bar -->
+<header>
+    <!-- Top bar with phone and social links -->
     <div class="hidden md:block w-full py-3 bg-white">
         <div
             class="w-full max-w-[1295.81px] mx-auto px-4 md:px-8 lg:px-16 flex justify-between items-center"
@@ -43,11 +43,14 @@ const phoneNumber = "+1 071 281 9795";
             <!-- Phone number -->
             <address class="not-italic">
                 <a
-                    href={`tel:${phoneNumber.replace(/\s+/g, '')}`}
+                    href={`tel:${phoneNumber.replace(/\s+/g, "")}`}
                     class="text-dark text-sm font-semibold leading-[22px] no-underline hover:no-underline flex items-center gap-2"
                     aria-label={`Call us at ${phoneNumber}`}
                 >
-                    <span class="w-4 h-4 flex items-center justify-center" aria-hidden="true">
+                    <span
+                        class="w-4 h-4 flex items-center justify-center"
+                        aria-hidden="true"
+                    >
                         <i class="fas fa-phone-alt text-primary"></i>
                     </span>
                     <span>{phoneNumber}</span>
@@ -73,152 +76,210 @@ const phoneNumber = "+1 071 281 9795";
         </div>
     </div>
 
-    <hr class="hidden sm:block w-full h-px bg-divider border-0" role="separator" aria-hidden="true" />
+    <hr
+        class="hidden sm:block w-full h-px bg-divider border-0"
+        role="separator"
+        aria-hidden="true"
+    />
 
-    <!-- Main navigation -->
-    <div class="w-full flex justify-center py-4">
-        <div class="w-full max-w-[1296px] px-4 md:px-8 lg:px-16">
-            <div class="flex flex-row justify-between items-center">
-                <!-- Logo -->
-                <a href="/" class="flex items-center gap-3" aria-label="Plumby - Home">
-                    <span class="flex items-center text-[38px] text-primary" aria-hidden="true">
-                        <i class="fas fa-faucet"></i>
-                    </span>
-                    <span class="text-dark text-2xl font-satoshi font-bold">Plumby</span>
-                </a>
+    <!-- Navigation wrapper -->
+    <div
+        class="bg-white shadow-sm transition-shadow duration-300 w-full"
+        id="sticky-nav"
+    >
+        <!-- Main navigation -->
+        <div class="w-full flex justify-center py-4">
+            <div class="w-full max-w-[1296px] px-4 md:px-8 lg:px-16">
+                <div class="flex flex-row justify-between items-center">
+                    <!-- Logo -->
+                    <a
+                        href="/"
+                        class="flex items-center gap-3"
+                        aria-label="Plumby - Home"
+                    >
+                        <span
+                            class="flex items-center text-[38px] text-primary"
+                            aria-hidden="true"
+                        >
+                            <i class="fas fa-faucet"></i>
+                        </span>
+                        <span class="text-dark text-2xl font-satoshi font-bold"
+                            >Plumby</span
+                        >
+                    </a>
 
-                <!-- Desktop navigation -->
-                <nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
-                    <div class="flex items-center gap-8">
-                        {
-                            navItems.map(({ href, text, isCurrent }) => (
+                    <!-- Desktop navigation -->
+                    <nav
+                        class="hidden lg:flex items-center gap-8"
+                        aria-label="Main navigation"
+                    >
+                        <div class="flex items-center gap-8">
+                            {
+                                navItems.map(({ href, text, isCurrent }) => (
+                                    <a
+                                        href={href}
+                                        class={`text-base font-medium ${
+                                            isCurrent
+                                                ? "text-primary"
+                                                : "text-dark hover:text-primary"
+                                        } transition-colors`}
+                                        aria-current={
+                                            isCurrent ? "page" : undefined
+                                        }
+                                    >
+                                        {text}
+                                    </a>
+                                ))
+                            }
+                        </div>
+                        <button
+                            type="button"
+                            onclick="window.location.href='/request-call'"
+                            class="bg-primary text-white text-base font-semibold leading-6 px-[18px] py-3 rounded-lg hover:bg-primary/90 transition-colors whitespace-nowrap"
+                            aria-label="Request a free call"
+                        >
+                            Request A Free Call
+                        </button>
+                    </nav>
+
+                    <!-- Mobile menu button -->
+                    <button
+                        type="button"
+                        id="mobile-menu-button"
+                        class="lg:hidden inline-flex items-center justify-center w-10 h-10 text-dark hover:text-primary transition-colors"
+                        aria-label="Toggle menu"
+                        aria-expanded="false"
+                        aria-controls="mobile-menu"
+                    >
+                        <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile navigation -->
+        <nav
+            id="mobile-menu"
+            class="hidden w-full md:hidden border-t border-divider bg-white"
+            aria-label="Mobile Navigation"
+        >
+            <div class="w-full max-w-[1296px] mx-auto px-4 md:px-8 py-4">
+                <ul class="flex flex-col gap-4 list-none" role="list">
+                    {
+                        navItems.map(({ href, text, isCurrent }) => (
+                            <li>
                                 <a
                                     href={href}
-                                    class={`text-base font-medium ${
-                                        isCurrent ? "text-primary" : "text-dark hover:text-primary"
-                                    } transition-colors`}
-                                    aria-current={isCurrent ? "page" : undefined}
+                                    class={`text-${isCurrent ? "primary" : "dark"} text-base font-medium leading-6 ${!isCurrent ? "hover:text-primary transition-colors" : ""}`}
+                                    aria-current={
+                                        isCurrent ? "page" : undefined
+                                    }
                                 >
                                     {text}
                                 </a>
-                            ))
-                        }
-                    </div>
-                    <button
-                        type="button"
-                        onclick="window.location.href='/request-call'"
-                        class="bg-primary text-white text-base font-semibold leading-6 px-[18px] py-3 rounded-lg hover:bg-primary/90 transition-colors whitespace-nowrap"
-                        aria-label="Request a free call"
-                    >
-                        Request A Free Call
-                    </button>
-                </nav>
-
-                <!-- Mobile menu button -->
-                <button
-                    type="button"
-                    class="lg:hidden inline-flex items-center justify-center w-10 h-10 text-dark hover:text-primary transition-colors"
-                    aria-label="Toggle menu"
-                    aria-expanded="false"
-                    aria-controls="mobile-menu"
-                >
-                    <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mobile navigation -->
-    <nav
-        id="mobile-menu"
-        class="hidden w-full md:hidden pt-4"
-        aria-label="Mobile Navigation"
-    >
-        <ul class="flex flex-col gap-4 list-none" role="list">
-            {navItems.map(({ href, text, isCurrent }) => (
-                <li>
-                    <a
-                        href={href}
-                        class={`text-${isCurrent ? 'primary' : 'dark'} text-base font-medium leading-6 ${!isCurrent ? 'hover:text-primary transition-colors' : ''}`}
-                        aria-current={isCurrent ? "page" : undefined}
-                    >{text}</a>
-                </li>
-            ))}
-            <li class="pt-2">
-                <button
-                    type="button"
-                    onclick="window.location.href='/request-call'"
-                    class="w-full bg-primary text-white text-base font-semibold leading-6 px-[18px] py-3 rounded-lg hover:bg-primary/90 transition-colors"
-                    aria-label="Request a free call"
-                >
-                    Request A Free Call
-                </button>
-            </li>
-            <li class="pt-4 border-t border-divider">
-                <!-- Phone number -->
-                <div class="flex flex-col items-center gap-4">
-                    <address class="not-italic">
-                        <a
-                            href={`tel:${phoneNumber.replace(/\s+/g, '')}`}
-                            class="text-dark text-sm font-semibold leading-[22px] no-underline hover:no-underline flex items-center gap-2"
-                            aria-label={`Call us at ${phoneNumber}`}
+                            </li>
+                        ))
+                    }
+                    <li class="pt-2">
+                        <button
+                            type="button"
+                            onclick="window.location.href='/request-call'"
+                            class="w-full bg-primary text-white text-base font-semibold leading-6 px-[18px] py-3 rounded-lg hover:bg-primary/90 transition-colors"
+                            aria-label="Request a free call"
                         >
-                            <span class="w-4 h-4 flex items-center justify-center" aria-hidden="true">
-                                <i class="fas fa-phone-alt text-primary"></i>
-                            </span>
-                            <span>{phoneNumber}</span>
-                        </a>
-                    </address>
+                            Request A Free Call
+                        </button>
+                    </li>
+                    <li class="pt-4 border-t border-divider">
+                        <!-- Phone number -->
+                        <div class="flex flex-col items-center gap-4">
+                            <address class="not-italic">
+                                <a
+                                    href={`tel:${phoneNumber.replace(/\s+/g, "")}`}
+                                    class="text-dark text-sm font-semibold leading-[22px] no-underline hover:no-underline flex items-center gap-2"
+                                    aria-label={`Call us at ${phoneNumber}`}
+                                >
+                                    <span
+                                        class="w-4 h-4 flex items-center justify-center"
+                                        aria-hidden="true"
+                                    >
+                                        <i class="fas fa-phone-alt text-primary"
+                                        ></i>
+                                    </span>
+                                    <span>{phoneNumber}</span>
+                                </a>
+                            </address>
 
-                    <!-- Social Media Links -->
-                    <nav
-                        class="flex items-center justify-center gap-6"
-                        aria-label="Social Media Links"
-                    >
-                        {socialLinks.map(({ href, icon, label }) => (
-                            <a
-                                href={href}
-                                class="text-dark hover:text-primary transition-colors"
-                                aria-label={label}
+                            <!-- Social Media Links -->
+                            <nav
+                                class="flex items-center justify-center gap-6"
+                                aria-label="Social Media Links"
                             >
-                                <i class={`${icon} text-sm`} aria-hidden="true"></i>
-                            </a>
-                        ))}
-                    </nav>
-                </div>
-            </li>
-        </ul>
-    </nav>
+                                {
+                                    socialLinks.map(({ href, icon, label }) => (
+                                        <a
+                                            href={href}
+                                            class="text-dark hover:text-primary transition-colors"
+                                            aria-label={label}
+                                        >
+                                            <i
+                                                class={`${icon} text-sm`}
+                                                aria-hidden="true"
+                                            />
+                                        </a>
+                                    ))
+                                }
+                            </nav>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 </header>
 
 <script>
-    // TypeScript type definitions
-    type MobileMenuElements = {
+    // Types for TypeScript
+    interface MobileMenuElements {
         button: HTMLButtonElement;
         menu: HTMLElement;
         icon: HTMLElement;
-    };
+    }
 
     // Function to toggle menu state
     function toggleMenu({ button, menu, icon }: MobileMenuElements): void {
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        button.setAttribute('aria-expanded', (!isExpanded).toString());
-        menu.classList.toggle('hidden');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-times');
+        const isExpanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", (!isExpanded).toString());
+        menu.classList.toggle("hidden");
+        icon.classList.toggle("fa-bars");
+        icon.classList.toggle("fa-times");
     }
 
     // Initialize mobile menu
     function initMobileMenu(): void {
-        const button = document.getElementById('mobile-menu-button') as HTMLButtonElement;
-        const menu = document.getElementById('mobile-menu') as HTMLElement;
-        const icon = button.querySelector('i') as HTMLElement;
+        const button = document.getElementById(
+            "mobile-menu-button",
+        ) as HTMLButtonElement;
+        const menu = document.getElementById("mobile-menu") as HTMLElement;
+        const icon = button.querySelector("i") as HTMLElement;
 
         if (button && menu && icon) {
-            button.addEventListener('click', () => toggleMenu({ button, menu, icon }));
+            button.addEventListener("click", () =>
+                toggleMenu({ button, menu, icon }),
+            );
         }
     }
 
     // Run initialization when DOM is ready
-    document.addEventListener('DOMContentLoaded', initMobileMenu);
+    document.addEventListener("DOMContentLoaded", initMobileMenu);
+
+    // Add scroll event listener to handle shadow
+    window.addEventListener("scroll", () => {
+        const nav = document.getElementById("sticky-nav");
+        if (window.scrollY > 0) {
+            nav?.classList.add("shadow-md");
+        } else {
+            nav?.classList.remove("shadow-md");
+        }
+    });
 </script>

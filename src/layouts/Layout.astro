@@ -17,7 +17,7 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="font-inter">
+	<body class="font-inter relative min-h-screen">
 		<slot />
 	</body>
 </html>
@@ -28,5 +28,13 @@ const { title } = Astro.props;
 		--color-dark: #171A1F;
 		--color-secondary: #495460;
 		--color-divider: #E2E7EC;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		overflow-x: hidden;
 	}
 </style>

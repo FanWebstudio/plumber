@@ -9,12 +9,13 @@ interface HeroContent {
 
 const content: HeroContent = {
     title: "We Fix All Your Plumbing Problems",
-    subtitle: "Lorem ipsum dolor sit amet consectetur adipiscing elit aenean id volutpat imperdiet quis at pellentesque nunc commodo nunc purus pulvinar nisi fusce.",
-    phoneNumber: "+1 271 281 9795"
+    subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipiscing elit aenean id volutpat imperdiet quis at pellentesque nunc commodo nunc purus pulvinar nisi fusce.",
+    phoneNumber: "+1 271 281 9795",
 };
 ---
 
-<section class="relative w-full h-[500px] md:h-[713px]">
+<section class="relative w-full h-[calc(500px+72px)] md:h-[calc(713px+72px)]">
     <!-- Background container -->
     <div
         class="absolute inset-0 w-full max-w-[1726px] h-full mx-auto px-4 md:px-8 lg:px-16"
@@ -53,7 +54,9 @@ const content: HeroContent = {
         </div>
 
         <!-- Buttons -->
-        <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-3 w-full sm:w-auto">
+        <div
+            class="flex flex-col sm:flex-row items-center gap-4 sm:gap-3 w-full sm:w-auto"
+        >
             <button
                 type="button"
                 onclick="window.location.href='/request-call'"
@@ -62,10 +65,13 @@ const content: HeroContent = {
                 Request A Free Call
             </button>
             <a
-                href={`tel:${content.phoneNumber.replace(/\s+/g, '')}`}
+                href={`tel:${content.phoneNumber.replace(/\s+/g, "")}`}
                 class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 sm:px-5 sm:py-5 bg-yellow hover:bg-yellow/90 transition-colors rounded-lg text-dark text-base font-semibold leading-6"
             >
-                <span class="w-4 h-4 flex items-center justify-center" aria-hidden="true">
+                <span
+                    class="w-4 h-4 flex items-center justify-center"
+                    aria-hidden="true"
+                >
                     <i class="fas fa-phone-alt text-dark"></i>
                 </span>
                 <span>Call us: {content.phoneNumber}</span>
