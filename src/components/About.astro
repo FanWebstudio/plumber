@@ -17,70 +17,71 @@ const rightFeatures: Feature[] = [
 ];
 ---
 
-<section class="w-full py-[120px] bg-white">
+<section class="w-full py-[120px] bg-white" aria-labelledby="about-title">
     <div class="w-full max-w-[1296px] mx-auto px-4">
         <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
             <!-- Left content -->
-            <div class="w-full lg:w-[549px] flex flex-col gap-20">
+            <article class="w-full lg:w-[549px] flex flex-col gap-20">
                 <!-- Text content -->
-                <div class="flex flex-col gap-6">
-                    <h2 class="text-[32px] sm:text-[48px] text-dark font-satoshi font-bold leading-[1.125]">
+                <header class="flex flex-col gap-6">
+                    <h2 id="about-title" class="text-[32px] sm:text-[48px] text-dark font-satoshi font-bold leading-[1.125]">
                         We Focus on Customer Satisfaction and Quality
                     </h2>
                     <p class="text-[#495460] text-base font-normal leading-6">
                         Use and re-use tons of responsive sections too a main create the perfect layout. Sections are firmly of organised into the perfect starting categories.
                     </p>
-                </div>
+                </header>
 
                 <!-- Features list -->
                 <div class="flex flex-col gap-[30px]">
-                    <h3 class="text-dark text-xl font-semibold leading-7">
+                    <h3 id="features-title" class="text-dark text-xl font-semibold leading-7">
                         A snapshot of Plumby's features:
                     </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-[72px] gap-y-[15px]">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-[72px] gap-y-[15px]" role="list" aria-labelledby="features-title">
                         <!-- Left features -->
-                        <div class="flex flex-col gap-[15px]">
+                        <ul class="flex flex-col gap-[15px] list-none">
                             {leftFeatures.map(feature => (
-                                <div class="flex items-center gap-2">
-                                    <div class="w-[22px] h-[22px] flex items-center justify-center">
+                                <li class="flex items-center gap-2">
+                                    <span class="w-[22px] h-[22px] flex items-center justify-center" aria-hidden="true">
                                         <i class={`${feature.icon} text-primary`}></i>
-                                    </div>
+                                    </span>
                                     <span class="text-dark text-base font-medium leading-6">
                                         {feature.title}
                                     </span>
-                                </div>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
                         <!-- Right features -->
-                        <div class="flex flex-col gap-[15px]">
+                        <ul class="flex flex-col gap-[15px] list-none">
                             {rightFeatures.map(feature => (
-                                <div class="flex items-center gap-2">
-                                    <div class="w-[22px] h-[22px] flex items-center justify-center">
+                                <li class="flex items-center gap-2">
+                                    <span class="w-[22px] h-[22px] flex items-center justify-center" aria-hidden="true">
                                         <i class={`${feature.icon} text-primary`}></i>
-                                    </div>
+                                    </span>
                                     <span class="text-dark text-base font-medium leading-6">
                                         {feature.title}
                                     </span>
-                                </div>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
                     </div>
                 </div>
-            </div>
+            </article>
 
             <!-- Right image and badge -->
-            <div class="w-full lg:w-[494px] relative">
+            <figure class="w-full lg:w-[494px] relative">
                 <!-- Main image -->
                 <div class="w-full aspect-[494/584] bg-gray-200 rounded-lg overflow-hidden">
                     <img 
                         src="/images/about-plumber.jpg" 
-                        alt="Professional plumber at work" 
+                        alt="Professional plumber at work"
+                        loading="lazy"
                         class="w-full h-full object-cover"
                     />
                 </div>
 
                 <!-- Quality badge -->
-                <div class="absolute left-[-60px] top-[50%] translate-y-[-50%] w-[178px] h-[182px] transform -rotate-30">
+                <div class="absolute left-[-60px] top-[50%] translate-y-[-50%] w-[178px] h-[182px] transform -rotate-30" aria-hidden="true">
                     <!-- Outer circle -->
                     <div class="absolute w-[168px] h-[168px] bg-white border-[3px] border-dark rounded-full left-[6.79px] top-[3.68px] transform -rotate-30"></div>
                     
@@ -111,7 +112,8 @@ const rightFeatures: Feature[] = [
                         ))}
                     </div>
                 </div>
-            </div>
+                <figcaption class="sr-only">Quality badge showcasing our commitment to excellence</figcaption>
+            </figure>
         </div>
     </div>
 </section>
