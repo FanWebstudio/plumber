@@ -1,0 +1,177 @@
+---
+// CTA Component
+const ctaImage = 'https://via.placeholder.com/1532x538';
+const phoneNumber = '+1 271 281 9795';
+---
+
+<section class="cta" aria-labelledby="cta-headline">
+  <div class="cta-background">
+    <img 
+      src={ctaImage} 
+      alt="Background image for call to action section" 
+      class="cta-background-image" 
+      loading="lazy"
+    />
+  </div>
+  
+  <div class="cta-content">
+    <header>
+      <h2 id="cta-headline" class="cta-title">
+        Having a Plumbing Problem? We'll Fixed it Today!
+      </h2>
+      <p class="cta-subtitle">
+        Whereby is the super simple way to connect over. No apps, downloads, or long meeting links.
+      </p>
+    </header>
+    
+    <div class="cta-actions">
+      <a 
+        href="/book-visit" 
+        class="cta-button cta-book-visit" 
+        aria-label="Book a plumbing visit"
+      >
+        Book A Visiting
+      </a>
+      
+      <a 
+        href={`tel:${phoneNumber.replace(/\s/g, '')}`} 
+        class="cta-button cta-call" 
+        aria-label="Call our plumbing service"
+      >
+        <svg 
+          class="phone-icon" 
+          width="16" 
+          height="16" 
+          viewBox="0 0 16 16" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path 
+            d="M12 10.6667L10.6667 12C10.6667 12 8 11.3333 6 9.33333C4 7.33333 3.33333 4.66667 3.33333 4.66667L5.33333 3.33333L4.66667 2H2.66667C2.33333 4 3.33333 6.66667 5.33333 8.66667C7.33333 10.6667 10 11.6667 12 10.6667Z" 
+            stroke="#171A1F" 
+            stroke-width="1.5"
+          />
+        </svg>
+        Call us: {phoneNumber}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    position: relative;
+    width: 100%;
+    max-width: 1532px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .cta-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .cta-background-image {
+    width: 100%;
+    height: 538px;
+    object-fit: cover;
+    border-radius: 16px;
+    background: linear-gradient(0deg, #1681FF 0%, #1681FF 100%);
+  }
+
+  .cta-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 127px 0;
+    text-align: center;
+  }
+
+  .cta-title {
+    max-width: 642px;
+    color: white;
+    font-size: 48px;
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+    line-height: 54px;
+  }
+
+  .cta-subtitle {
+    max-width: 388px;
+    color: white;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 24px;
+    margin-top: 24px;
+  }
+
+  .cta-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .cta-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+
+  .cta-book-visit {
+    background: white;
+    color: #171A1F;
+  }
+
+  .cta-call {
+    background: #FFD234;
+    color: #171A1F;
+  }
+
+  .phone-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .cta-button:hover {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    .cta-actions {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .cta-button {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .cta-title {
+      font-size: 32px;
+      line-height: 40px;
+    }
+
+    .cta-subtitle {
+      font-size: 14px;
+    }
+  }
+</style>
