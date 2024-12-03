@@ -5,9 +5,10 @@ import '@fontsource/inter/600.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 ---
 
-<header>
+<header class="relative">
+    <!-- Top bar -->
     <div class="w-full py-3 flex justify-center bg-white">
-        <div class="w-[1295.81px] flex justify-between items-center">
+        <div class="w-full max-w-[1295.81px] px-4 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-0">
             <address class="flex items-center gap-1 not-italic">
                 <span class="w-4 h-4 relative">
                     <i class="fas fa-phone-alt text-primary"></i>
@@ -32,29 +33,65 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
         </div>
     </div>
     <hr class="w-full h-px bg-divider border-0" />
+
+    <!-- Main header -->
     <div class="w-full flex justify-center py-4">
-        <div class="w-[1296px] flex justify-between items-center">
-            <a href="/" class="flex items-center gap-3">
-                <span class="flex items-center text-[38px] text-primary" aria-hidden="true">
-                    <i class="fas fa-faucet"></i>
-                </span>
-                <span class="text-dark font-satoshi text-[30.52px] font-bold leading-[34.34px]">plumby</span>
-            </a>
-            <nav class="flex items-center gap-10" aria-label="Main navigation">
-                <ul class="flex gap-10 list-none">
+        <div class="w-full max-w-[1296px] px-4">
+            <div class="flex flex-row justify-between items-center">
+                <a href="/" class="flex items-center gap-3">
+                    <span class="flex items-center text-[38px] text-primary" aria-hidden="true">
+                        <i class="fas fa-faucet"></i>
+                    </span>
+                    <span class="text-dark font-satoshi text-[30.52px] font-bold leading-[34.34px]">plumby</span>
+                </a>
+
+                <!-- Mobile menu button -->
+                <button 
+                    type="button" 
+                    class="md:hidden text-dark hover:text-primary transition-colors"
+                    aria-label="Toggle menu"
+                    onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
+                >
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+
+                <!-- Desktop navigation -->
+                <nav class="hidden md:flex items-center gap-10" aria-label="Main navigation">
+                    <ul class="flex gap-10 list-none">
+                        <li><a href="/" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Home</a></li>
+                        <li><a href="/about" class="text-primary text-base font-medium leading-6">About</a></li>
+                        <li><a href="/service" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Service</a></li>
+                        <li><a href="/blog" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Blog</a></li>
+                        <li><a href="/contact" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Contact</a></li>
+                    </ul>
+                    <button 
+                        type="button" 
+                        onclick="window.location.href='/request-call'"
+                        class="bg-primary text-white text-base font-semibold leading-6 px-[18px] py-3 rounded-lg hover:bg-primary/90 transition-colors whitespace-nowrap"
+                    >
+                        Request A Free Call
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Mobile navigation -->
+            <nav id="mobile-menu" class="hidden w-full md:hidden pt-4" aria-label="Mobile navigation">
+                <ul class="flex flex-col gap-4 list-none">
                     <li><a href="/" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Home</a></li>
                     <li><a href="/about" class="text-primary text-base font-medium leading-6">About</a></li>
                     <li><a href="/service" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Service</a></li>
                     <li><a href="/blog" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Blog</a></li>
                     <li><a href="/contact" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Contact</a></li>
+                    <li class="pt-2">
+                        <button 
+                            type="button" 
+                            onclick="window.location.href='/request-call'"
+                            class="w-full bg-primary text-white text-base font-semibold leading-6 px-[18px] py-3 rounded-lg hover:bg-primary/90 transition-colors"
+                        >
+                            Request A Free Call
+                        </button>
+                    </li>
                 </ul>
-                <button 
-                    type="button" 
-                    onclick="window.location.href='/request-call'"
-                    class="bg-primary text-white text-base font-semibold leading-6 px-[18px] py-3 rounded-lg hover:bg-primary/90 transition-colors"
-                >
-                    Request A Free Call
-                </button>
             </nav>
         </div>
     </div>
