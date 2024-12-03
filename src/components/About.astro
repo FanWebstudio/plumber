@@ -1,0 +1,117 @@
+---
+interface Feature {
+    title: string;
+    icon: string;
+}
+
+const leftFeatures: Feature[] = [
+    { title: "Experienced Plumbers", icon: "fas fa-check" },
+    { title: "Competitive Pricing", icon: "fas fa-check" },
+    { title: "Eco-Friendly Options", icon: "fas fa-check" }
+];
+
+const rightFeatures: Feature[] = [
+    { title: "24/7 Emergency Service", icon: "fas fa-check" },
+    { title: "Customer Satisfaction Guarantee", icon: "fas fa-check" },
+    { title: "Transparent Communication", icon: "fas fa-check" }
+];
+---
+
+<section class="w-full py-[120px] bg-white">
+    <div class="w-full max-w-[1296px] mx-auto px-4">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
+            <!-- Left content -->
+            <div class="w-full lg:w-[549px] flex flex-col gap-20">
+                <!-- Text content -->
+                <div class="flex flex-col gap-6">
+                    <h2 class="text-[32px] sm:text-[48px] text-dark font-satoshi font-bold leading-[1.125]">
+                        We Focus on Customer Satisfaction and Quality
+                    </h2>
+                    <p class="text-[#495460] text-base font-normal leading-6">
+                        Use and re-use tons of responsive sections too a main create the perfect layout. Sections are firmly of organised into the perfect starting categories.
+                    </p>
+                </div>
+
+                <!-- Features list -->
+                <div class="flex flex-col gap-[30px]">
+                    <h3 class="text-dark text-xl font-semibold leading-7">
+                        A snapshot of Plumby's features:
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-[72px] gap-y-[15px]">
+                        <!-- Left features -->
+                        <div class="flex flex-col gap-[15px]">
+                            {leftFeatures.map(feature => (
+                                <div class="flex items-center gap-2">
+                                    <div class="w-[22px] h-[22px] flex items-center justify-center">
+                                        <i class={`${feature.icon} text-primary`}></i>
+                                    </div>
+                                    <span class="text-dark text-base font-medium leading-6">
+                                        {feature.title}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                        <!-- Right features -->
+                        <div class="flex flex-col gap-[15px]">
+                            {rightFeatures.map(feature => (
+                                <div class="flex items-center gap-2">
+                                    <div class="w-[22px] h-[22px] flex items-center justify-center">
+                                        <i class={`${feature.icon} text-primary`}></i>
+                                    </div>
+                                    <span class="text-dark text-base font-medium leading-6">
+                                        {feature.title}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right image and badge -->
+            <div class="w-full lg:w-[494px] relative">
+                <!-- Main image -->
+                <div class="w-full aspect-[494/584] bg-gray-200 rounded-lg overflow-hidden">
+                    <img 
+                        src="/images/about-plumber.jpg" 
+                        alt="Professional plumber at work" 
+                        class="w-full h-full object-cover"
+                    />
+                </div>
+
+                <!-- Quality badge -->
+                <div class="absolute left-[-60px] top-[50%] translate-y-[-50%] w-[178px] h-[182px] transform -rotate-30">
+                    <!-- Outer circle -->
+                    <div class="absolute w-[168px] h-[168px] bg-white border-[3px] border-dark rounded-full left-[6.79px] top-[3.68px] transform -rotate-30"></div>
+                    
+                    <!-- Inner yellow circle -->
+                    <div class="absolute w-[100px] h-[100px] bg-yellow border-[3px] border-dark rounded-full left-[53.23px] top-[16.12px] transform -rotate-30"></div>
+                    
+                    <!-- Wrench icon -->
+                    <div class="absolute w-[42px] h-[42px] left-[100.17px] top-[13.06px]">
+                        <div class="absolute w-[38.72px] h-[38.72px] border-[3.25px] border-dark left-[1.64px] top-[40.36px]"></div>
+                        <div class="absolute w-[12.96px] h-[15.75px] border-[3.25px] border-dark left-[14.52px] top-[31.39px]"></div>
+                    </div>
+                    
+                    <!-- Decorative stars -->
+                    <div class="absolute w-[11.15px] h-[10.68px] bg-primary left-[113.55px] top-[-39.66px] transform rotate-[3.52deg]"></div>
+                    <div class="absolute w-[11.15px] h-[10.68px] bg-primary left-[179.14px] top-[19.64px] transform rotate-[3.52deg]"></div>
+                    <div class="absolute w-[11.15px] h-[10.68px] bg-primary left-[113.97px] top-[90.75px] transform rotate-[3.52deg]"></div>
+                    <div class="absolute w-[11.15px] h-[10.68px] bg-primary left-[51.85px] top-[41.17px] transform rotate-[3.52deg]"></div>
+                    
+                    <!-- Circular text -->
+                    <div class="absolute w-[149.97px] h-[144.44px] left-[173.13px] top-[-56.79px] transform rotate-75">
+                        {["Q", "U", "A", "L", "I", "T", "Y", " ", "Q", "U", "I", "C", "K", " ", "R", "E", "S", "U", "L", "T", "S", " ", "S", "A", "F", "E"].map((letter, index) => (
+                            <span 
+                                class="absolute text-[13.53px] font-satoshi font-black text-dark"
+                                style={`transform: rotate(${index * 15 - 79.18}deg) translateY(-82.79px);`}
+                            >
+                                {letter}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
