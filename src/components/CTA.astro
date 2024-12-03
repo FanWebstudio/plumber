@@ -1,54 +1,55 @@
 ---
-// CTA Component
-const phoneNumber = '+1 271 281 9795';
+const phoneNumber = "+1 271 281 9795";
 ---
 
-<section class="relative w-full max-w-[1532px] mx-auto" aria-labelledby="cta-headline">
-  <div class="absolute inset-0 -z-10">
-    <img 
-      src="/images/BG.png" 
-      alt="Background image for call to action section" 
-      class="w-full h-[538px] object-cover rounded-2xl bg-[#1681FF]" 
+<section
+  class="relative w-full max-w-[1532px] mx-auto px-4 md:px-8 lg:px-0 my-24"
+  aria-labelledby="cta-headline"
+>
+  <div class="absolute inset-x-4 md:inset-x-8 lg:inset-x-0 inset-y-0 -z-10">
+    <img
+      src="/images/BG.png"
+      alt="Background image for call to action section"
+      class="w-full h-[400px] md:h-[538px] object-cover rounded-2xl bg-[#1681FF]"
       loading="lazy"
     />
   </div>
-  
-  <div class="relative w-full max-w-[642px] mx-auto py-32 px-5 flex flex-col justify-center items-center gap-10 text-center">
-    <header>
-      <h2 id="cta-headline" class="text-5xl font-satoshi font-bold leading-[54px] text-white">
-        Having a Plumbing Problem? We'll Fixed it Today!
+
+  <div
+    class="relative w-full max-w-[642px] mx-auto py-16 md:py-32 flex flex-col justify-center items-center gap-8 md:gap-10 text-center"
+  >
+    <header class="px-4">
+      <h2
+        id="cta-headline"
+        class="text-3xl md:text-5xl font-satoshi font-bold leading-tight md:leading-[54px] text-white"
+      >
+        Having a Plumbing Problem? We'll Fix it Today!
       </h2>
-      <p class="mt-6 max-w-[388px] mx-auto text-base font-inter font-normal leading-6 text-white">
-        Whereby is the super simple way to connect over. No apps, downloads, or long meeting links.
+      <p
+        class="mt-4 md:mt-6 max-w-[388px] mx-auto text-sm md:text-base font-inter font-normal leading-relaxed md:leading-6 text-white"
+      >
+        Whereby is the super simple way to connect over. No apps, downloads, or
+        long meeting links.
       </p>
     </header>
-    
-    <div class="flex justify-center items-center gap-4 md:flex-row flex-col w-full">
-      <a 
-        href="/book-visit" 
-        class="flex justify-center items-center gap-2.5 px-5 py-5 bg-white rounded-lg text-[#171A1F] font-inter text-base font-semibold leading-6 transition-transform hover:scale-105 md:w-auto w-full"
+
+    <div
+      class="flex justify-center items-center gap-3 md:gap-4 flex-col md:flex-row w-full px-4"
+    >
+      <a
+        href="/book-visit"
+        class="flex justify-center items-center gap-2.5 px-4 py-4 md:px-5 md:py-5 bg-white rounded-lg text-[#171A1F] font-inter text-sm md:text-base font-semibold leading-normal md:leading-6 transition-transform hover:scale-105 w-full md:w-auto"
         aria-label="Book a plumbing visit"
       >
-        Book A Visiting
+        Book a Visit
       </a>
-      
-      <a 
-        href={`tel:${phoneNumber.replace(/\s/g, '')}`} 
-        class="flex justify-center items-center gap-2.5 px-5 py-5 bg-[#FFD234] rounded-lg text-[#171A1F] font-inter text-base font-semibold leading-6 transition-transform hover:scale-105 md:w-auto w-full"
+
+      <a
+        href={`tel:${phoneNumber.replace(/\s/g, "")}`}
+        class="flex justify-center items-center gap-2.5 px-4 py-4 md:px-5 md:py-5 bg-[#FFD234] rounded-lg text-[#171A1F] font-inter text-sm md:text-base font-semibold leading-normal md:leading-6 transition-transform hover:scale-105 w-full md:w-auto whitespace-nowrap"
         aria-label="Call our plumbing service"
       >
-        <svg 
-          class="w-4 h-4" 
-          viewBox="0 0 16 16" 
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path 
-            d="M12 10.6667L10.6667 12C10.6667 12 8 11.3333 6 9.33333C4 7.33333 3.33333 4.66667 3.33333 4.66667L5.33333 3.33333L4.66667 2H2.66667C2.33333 4 3.33333 6.66667 5.33333 8.66667C7.33333 10.6667 10 11.6667 12 10.6667Z" 
-            stroke="#171A1F" 
-            stroke-width="1.5"
-          />
-        </svg>
+        <i class="fas fa-phone w-4 h-4"></i>
         Call us: {phoneNumber}
       </a>
     </div>
