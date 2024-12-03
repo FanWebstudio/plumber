@@ -38,7 +38,7 @@ const phoneNumber = "+1 071 281 9795";
     <!-- Top bar -->
     <div class="hidden md:block w-full py-3 bg-white">
         <div
-            class="w-full max-w-[1295.81px] mx-auto px-4 flex justify-between items-center"
+            class="w-full max-w-[1295.81px] mx-auto px-4 md:px-8 lg:px-16 flex justify-between items-center"
         >
             <!-- Phone number -->
             <address class="not-italic">
@@ -72,53 +72,38 @@ const phoneNumber = "+1 071 281 9795";
             </ul>
         </div>
     </div>
+
     <hr class="hidden sm:block w-full h-px bg-divider border-0" role="separator" aria-hidden="true" />
 
-    <!-- Main header -->
+    <!-- Main navigation -->
     <div class="w-full flex justify-center py-4">
-        <div class="w-full max-w-[1296px] px-4">
+        <div class="w-full max-w-[1296px] px-4 md:px-8 lg:px-16">
             <div class="flex flex-row justify-between items-center">
+                <!-- Logo -->
                 <a href="/" class="flex items-center gap-3" aria-label="Plumby - Home">
-                    <span
-                        class="flex items-center text-[38px] text-primary"
-                        aria-hidden="true"
-                    >
+                    <span class="flex items-center text-[38px] text-primary" aria-hidden="true">
                         <i class="fas fa-faucet"></i>
                     </span>
-                    <span
-                        class="text-dark font-satoshi text-[30.52px] font-bold leading-[34.34px]"
-                        >plumby</span
-                    >
+                    <span class="text-dark text-2xl font-satoshi font-bold">Plumby</span>
                 </a>
 
-                <!-- Mobile menu button -->
-                <button
-                    type="button"
-                    class="md:hidden text-dark hover:text-primary transition-colors"
-                    aria-label="Toggle navigation menu"
-                    aria-expanded="false"
-                    aria-controls="mobile-menu"
-                    id="mobile-menu-button"
-                >
-                    <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
-                </button>
-
                 <!-- Desktop navigation -->
-                <nav
-                    class="hidden md:flex items-center gap-10"
-                    aria-label="Main Navigation"
-                >
-                    <ul class="flex gap-10 list-none" role="list">
-                        {navItems.map(({ href, text, isCurrent }) => (
-                            <li>
+                <nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+                    <div class="flex items-center gap-8">
+                        {
+                            navItems.map(({ href, text, isCurrent }) => (
                                 <a
                                     href={href}
-                                    class={`text-${isCurrent ? 'primary' : 'dark'} text-base font-medium leading-6 ${!isCurrent ? 'hover:text-primary transition-colors' : ''}`}
+                                    class={`text-base font-medium ${
+                                        isCurrent ? "text-primary" : "text-dark hover:text-primary"
+                                    } transition-colors`}
                                     aria-current={isCurrent ? "page" : undefined}
-                                >{text}</a>
-                            </li>
-                        ))}
-                    </ul>
+                                >
+                                    {text}
+                                </a>
+                            ))
+                        }
+                    </div>
                     <button
                         type="button"
                         onclick="window.location.href='/request-call'"
@@ -128,71 +113,82 @@ const phoneNumber = "+1 071 281 9795";
                         Request A Free Call
                     </button>
                 </nav>
+
+                <!-- Mobile menu button -->
+                <button
+                    type="button"
+                    class="lg:hidden inline-flex items-center justify-center w-10 h-10 text-dark hover:text-primary transition-colors"
+                    aria-label="Toggle menu"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu"
+                >
+                    <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
+                </button>
             </div>
-
-            <!-- Mobile navigation -->
-            <nav
-                id="mobile-menu"
-                class="hidden w-full md:hidden pt-4"
-                aria-label="Mobile Navigation"
-            >
-                <ul class="flex flex-col gap-4 list-none" role="list">
-                    {navItems.map(({ href, text, isCurrent }) => (
-                        <li>
-                            <a
-                                href={href}
-                                class={`text-${isCurrent ? 'primary' : 'dark'} text-base font-medium leading-6 ${!isCurrent ? 'hover:text-primary transition-colors' : ''}`}
-                                aria-current={isCurrent ? "page" : undefined}
-                            >{text}</a>
-                        </li>
-                    ))}
-                    <li class="pt-2">
-                        <button
-                            type="button"
-                            onclick="window.location.href='/request-call'"
-                            class="w-full bg-primary text-white text-base font-semibold leading-6 px-[18px] py-3 rounded-lg hover:bg-primary/90 transition-colors"
-                            aria-label="Request a free call"
-                        >
-                            Request A Free Call
-                        </button>
-                    </li>
-                    <li class="pt-4 border-t border-divider">
-                        <!-- Phone number -->
-                        <div class="flex flex-col items-center gap-4">
-                            <address class="not-italic">
-                                <a
-                                    href={`tel:${phoneNumber.replace(/\s+/g, '')}`}
-                                    class="text-dark text-sm font-semibold leading-[22px] no-underline hover:no-underline flex items-center gap-2"
-                                    aria-label={`Call us at ${phoneNumber}`}
-                                >
-                                    <span class="w-4 h-4 flex items-center justify-center" aria-hidden="true">
-                                        <i class="fas fa-phone-alt text-primary"></i>
-                                    </span>
-                                    <span>{phoneNumber}</span>
-                                </a>
-                            </address>
-
-                            <!-- Social Media Links -->
-                            <nav
-                                class="flex items-center justify-center gap-6"
-                                aria-label="Social Media Links"
-                            >
-                                {socialLinks.map(({ href, icon, label }) => (
-                                    <a
-                                        href={href}
-                                        class="text-dark hover:text-primary transition-colors"
-                                        aria-label={label}
-                                    >
-                                        <i class={`${icon} text-sm`} aria-hidden="true"></i>
-                                    </a>
-                                ))}
-                            </nav>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </div>
+
+    <!-- Mobile navigation -->
+    <nav
+        id="mobile-menu"
+        class="hidden w-full md:hidden pt-4"
+        aria-label="Mobile Navigation"
+    >
+        <ul class="flex flex-col gap-4 list-none" role="list">
+            {navItems.map(({ href, text, isCurrent }) => (
+                <li>
+                    <a
+                        href={href}
+                        class={`text-${isCurrent ? 'primary' : 'dark'} text-base font-medium leading-6 ${!isCurrent ? 'hover:text-primary transition-colors' : ''}`}
+                        aria-current={isCurrent ? "page" : undefined}
+                    >{text}</a>
+                </li>
+            ))}
+            <li class="pt-2">
+                <button
+                    type="button"
+                    onclick="window.location.href='/request-call'"
+                    class="w-full bg-primary text-white text-base font-semibold leading-6 px-[18px] py-3 rounded-lg hover:bg-primary/90 transition-colors"
+                    aria-label="Request a free call"
+                >
+                    Request A Free Call
+                </button>
+            </li>
+            <li class="pt-4 border-t border-divider">
+                <!-- Phone number -->
+                <div class="flex flex-col items-center gap-4">
+                    <address class="not-italic">
+                        <a
+                            href={`tel:${phoneNumber.replace(/\s+/g, '')}`}
+                            class="text-dark text-sm font-semibold leading-[22px] no-underline hover:no-underline flex items-center gap-2"
+                            aria-label={`Call us at ${phoneNumber}`}
+                        >
+                            <span class="w-4 h-4 flex items-center justify-center" aria-hidden="true">
+                                <i class="fas fa-phone-alt text-primary"></i>
+                            </span>
+                            <span>{phoneNumber}</span>
+                        </a>
+                    </address>
+
+                    <!-- Social Media Links -->
+                    <nav
+                        class="flex items-center justify-center gap-6"
+                        aria-label="Social Media Links"
+                    >
+                        {socialLinks.map(({ href, icon, label }) => (
+                            <a
+                                href={href}
+                                class="text-dark hover:text-primary transition-colors"
+                                aria-label={label}
+                            >
+                                <i class={`${icon} text-sm`} aria-hidden="true"></i>
+                            </a>
+                        ))}
+                    </nav>
+                </div>
+            </li>
+        </ul>
+    </nav>
 </header>
 
 <script>
