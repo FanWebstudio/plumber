@@ -1,22 +1,26 @@
 ---
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
-import '@fontsource/inter/600.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 ---
 
 <header class="relative">
     <!-- Top bar -->
     <div class="w-full py-3 flex justify-center bg-white">
         <div class="w-full max-w-[1295.81px] px-4 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-0">
-            <address class="flex items-center gap-1 not-italic">
-                <span class="w-4 h-4 relative">
-                    <i class="fas fa-phone-alt text-primary"></i>
-                </span>
-                <span class="text-secondary text-sm font-medium leading-[22px]">Call Us:</span>
-                <a href="tel:+10712819795" class="text-dark text-sm font-semibold leading-[22px] no-underline hover:no-underline">+1 071 281 9795</a>
+            <!-- Phone number -->
+            <address class="hidden sm:block not-italic">
+                <a href="tel:+10712819795" class="text-dark text-sm font-semibold leading-[22px] no-underline hover:no-underline flex items-center gap-2">
+                    <span class="w-4 h-4 relative">
+                        <i class="fas fa-phone-alt text-primary"></i>
+                    </span>
+                    +1 071 281 9795
+                </a>
             </address>
-            <nav class="flex items-center gap-6" aria-label="Social Media">
+
+            <!-- Social Media Links -->
+            <nav class="hidden sm:flex items-center gap-6" aria-label="Social Media">
                 <a href="#" class="text-dark hover:text-primary transition-colors" aria-label="Email us">
                     <i class="far fa-envelope text-sm"></i>
                 </a>
@@ -39,15 +43,21 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
         <div class="w-full max-w-[1296px] px-4">
             <div class="flex flex-row justify-between items-center">
                 <a href="/" class="flex items-center gap-3">
-                    <span class="flex items-center text-[38px] text-primary" aria-hidden="true">
+                    <span
+                        class="flex items-center text-[38px] text-primary"
+                        aria-hidden="true"
+                    >
                         <i class="fas fa-faucet"></i>
                     </span>
-                    <span class="text-dark font-satoshi text-[30.52px] font-bold leading-[34.34px]">plumby</span>
+                    <span
+                        class="text-dark font-satoshi text-[30.52px] font-bold leading-[34.34px]"
+                        >plumby</span
+                    >
                 </a>
 
                 <!-- Mobile menu button -->
-                <button 
-                    type="button" 
+                <button
+                    type="button"
                     class="md:hidden text-dark hover:text-primary transition-colors"
                     aria-label="Toggle menu"
                     onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
@@ -56,16 +66,44 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
                 </button>
 
                 <!-- Desktop navigation -->
-                <nav class="hidden md:flex items-center gap-10" aria-label="Main navigation">
+                <nav
+                    class="hidden md:flex items-center gap-10"
+                    aria-label="Main navigation"
+                >
                     <ul class="flex gap-10 list-none">
-                        <li><a href="/" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Home</a></li>
-                        <li><a href="/about" class="text-primary text-base font-medium leading-6">About</a></li>
-                        <li><a href="/service" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Service</a></li>
-                        <li><a href="/blog" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Blog</a></li>
-                        <li><a href="/contact" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Contact</a></li>
+                        <li>
+                            <a
+                                href="/"
+                                class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
+                                >Home</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/about"
+                                class="text-primary text-base font-medium leading-6"
+                                >About</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/service"
+                                class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
+                                >Service</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/blog"
+                                class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
+                                >Blog</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/contact"
+                                class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
+                                >Contact</a>
+                        </li>
                     </ul>
-                    <button 
-                        type="button" 
+                    <button
+                        type="button"
                         onclick="window.location.href='/request-call'"
                         class="bg-primary text-white text-base font-semibold leading-6 px-[18px] py-3 rounded-lg hover:bg-primary/90 transition-colors whitespace-nowrap"
                     >
@@ -75,21 +113,82 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
             </div>
 
             <!-- Mobile navigation -->
-            <nav id="mobile-menu" class="hidden w-full md:hidden pt-4" aria-label="Mobile navigation">
+            <nav
+                id="mobile-menu"
+                class="hidden w-full md:hidden pt-4"
+                aria-label="Mobile navigation"
+            >
                 <ul class="flex flex-col gap-4 list-none">
-                    <li><a href="/" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Home</a></li>
-                    <li><a href="/about" class="text-primary text-base font-medium leading-6">About</a></li>
-                    <li><a href="/service" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Service</a></li>
-                    <li><a href="/blog" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Blog</a></li>
-                    <li><a href="/contact" class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors">Contact</a></li>
+                    <li>
+                        <a
+                            href="/"
+                            class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
+                            >Home</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/about"
+                            class="text-primary text-base font-medium leading-6"
+                            >About</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/service"
+                            class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
+                            >Service</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/blog"
+                            class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
+                            >Blog</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/contact"
+                            class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
+                            >Contact</a
+                        >
+                    </li>
                     <li class="pt-2">
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             onclick="window.location.href='/request-call'"
                             class="w-full bg-primary text-white text-base font-semibold leading-6 px-[18px] py-3 rounded-lg hover:bg-primary/90 transition-colors"
                         >
                             Request A Free Call
                         </button>
+                    </li>
+                    <li class="pt-4 border-t border-divider">
+                        <!-- Phone number -->
+                        <address class="not-italic mb-4">
+                            <a href="tel:+10712819795" class="text-dark text-sm font-semibold leading-[22px] no-underline hover:no-underline flex items-center gap-2">
+                                <span class="w-4 h-4 relative">
+                                    <i class="fas fa-phone-alt text-primary"></i>
+                                </span>
+                                +1 071 281 9795
+                            </a>
+                        </address>
+
+                        <!-- Social Media Links -->
+                        <nav class="flex items-center gap-6" aria-label="Social Media">
+                            <a href="#" class="text-dark hover:text-primary transition-colors" aria-label="Email us">
+                                <i class="far fa-envelope text-sm"></i>
+                            </a>
+                            <a href="#" class="text-dark hover:text-primary transition-colors" aria-label="Visit our Facebook">
+                                <i class="fab fa-facebook-f text-sm"></i>
+                            </a>
+                            <a href="#" class="text-dark hover:text-primary transition-colors" aria-label="Follow us on Instagram">
+                                <i class="fab fa-instagram text-sm"></i>
+                            </a>
+                            <a href="#" class="text-dark hover:text-primary transition-colors" aria-label="Follow us on Twitter">
+                                <i class="fab fa-twitter text-sm"></i>
+                            </a>
+                        </nav>
                     </li>
                 </ul>
             </nav>
