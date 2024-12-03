@@ -1,0 +1,191 @@
+---
+// Testimonials Component
+const testimonials = [
+  {
+    name: 'Devon Lane',
+    location: 'New York',
+    image: 'https://via.placeholder.com/80x80',
+    quote: 'Plumby\'s service was amazing! They arrived on time and quickly identified the problem with our pipes. They explained everything in detail and fixed the issue within an hour.',
+  },
+  {
+    name: 'Rosemary Sherman',
+    location: 'New York',
+    image: 'https://via.placeholder.com/80x80',
+    quote: 'Plumby\'s service was amazing! They arrived on time and quickly identified the problem with our pipes. They explained everything in detail and fixed the issue within an hour.',
+  },
+  {
+    name: 'Domingo Flores',
+    location: 'New York',
+    image: 'https://via.placeholder.com/80x80',
+    quote: 'I had a great experience with Plumby. Their team arrived on time and did an excellent job repairing my leaky faucet. They were professional, and completed the job quickly.',
+  },
+  {
+    name: 'Deborah Carr',
+    location: 'New York',
+    image: 'https://via.placeholder.com/80x80',
+    quote: 'I had a serious plumbing emergency in the middle of the night and Plumby was there to save the day. Their emergency service was prompt & life-saving.',
+  },
+  {
+    name: 'Fernando Sims',
+    location: 'New York',
+    image: 'https://via.placeholder.com/80x80',
+    quote: 'Plumby\'s service was amazing! They arrived on time and quickly identified the problem with our pipes. They explained everything in detail and fixed the issue within an hour.',
+  }
+];
+---
+
+<section class="testimonials" aria-labelledby="testimonials-heading">
+  <div class="testimonials-container">
+    <header class="testimonials-header">
+      <h2 id="testimonials-heading" class="testimonials-title">What Our Clients Say</h2>
+      <p class="testimonials-subtitle">
+        Use and re-use tons of responsive sections too a main create the perfect layout. 
+        Sections are firmly of organised into the perfect starting categories.
+      </p>
+    </header>
+
+    <div class="testimonials-grid">
+      {testimonials.map((testimonial) => (
+        <article class="testimonial-card">
+          <img 
+            src={testimonial.image} 
+            alt={`Portrait of ${testimonial.name}`} 
+            class="testimonial-avatar" 
+            width="80" 
+            height="80" 
+          />
+          <div class="testimonial-content">
+            <div class="testimonial-rating" aria-label="5 out of 5 stars">
+              {[...Array(5)].map(() => (
+                <span class="star" aria-hidden="true"></span>
+              ))}
+            </div>
+            <blockquote class="testimonial-quote">
+              {testimonial.quote}
+            </blockquote>
+            <footer class="testimonial-author">
+              <span class="author-name">{testimonial.name}</span>
+              <span class="author-location">{testimonial.location}</span>
+            </footer>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 96px 0;
+    background: white;
+  }
+
+  .testimonials-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 70px;
+  }
+
+  .testimonials-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .testimonials-title {
+    color: #171A1F;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 54px;
+  }
+
+  .testimonials-subtitle {
+    max-width: 614px;
+    color: #495460;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .testimonials-grid {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding: 0 20px;
+  }
+
+  .testimonial-card {
+    flex: 0 0 auto;
+    width: 275px;
+    padding: 24px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #E2E7EC;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .testimonial-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .testimonial-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .testimonial-rating {
+    display: flex;
+    gap: 7px;
+  }
+
+  .star {
+    width: 18.91px;
+    height: 18.09px;
+    background: #1681FF;
+  }
+
+  .testimonial-quote {
+    color: #171A1F;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .testimonial-author {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .author-name {
+    color: #171A1F;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .author-location {
+    color: #495460;
+    font-size: 16px;
+  }
+
+  @media (max-width: 1200px) {
+    .testimonials-grid {
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+    }
+
+    .testimonial-card {
+      scroll-snap-align: center;
+    }
+  }
+</style>
