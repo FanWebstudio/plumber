@@ -1,5 +1,17 @@
 ---
 import "@fortawesome/fontawesome-free/css/all.min.css";
+
+interface HeroContent {
+    title: string;
+    subtitle: string;
+    phoneNumber: string;
+}
+
+const content: HeroContent = {
+    title: "We Fix All Your Plumbing Problems",
+    subtitle: "Lorem ipsum dolor sit amet consectetur adipiscing elit aenean id volutpat imperdiet quis at pellentesque nunc commodo nunc purus pulvinar nisi fusce.",
+    phoneNumber: "+1 271 281 9795"
+};
 ---
 
 <section class="relative w-full h-[500px] md:h-[713px]">
@@ -31,14 +43,12 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
             <h1
                 class="text-white text-4xl md:text-[72px] font-satoshi font-bold leading-tight md:leading-[80px] text-center"
             >
-                We Fix All Your Plumbing Problems
+                {content.title}
             </h1>
             <p
                 class="text-white text-sm md:text-base font-normal leading-5 md:leading-6 text-center max-w-[642px]"
             >
-                Lorem ipsum dolor sit amet consectetur adipiscing elit aenean id
-                volutpat imperdiet quis at pellentesque nunc commodo nunc purus
-                pulvinar nisi fusce.
+                {content.subtitle}
             </p>
         </div>
 
@@ -53,14 +63,14 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
             </button>
             <button
                 type="button"
-                onclick="window.location.href='tel:+12712819795'"
+                onclick={`window.location.href='tel:${content.phoneNumber.replace(/\s+/g, '')}'`}
                 class="w-full sm:w-auto inline-flex items-center justify-center px-5 py-5 bg-yellow text-dark text-base font-semibold leading-6 rounded-lg hover:bg-yellow/90 transition-colors gap-2.5"
-                aria-label="Call us at +1 271 281 9795"
+                aria-label={`Call us at ${content.phoneNumber}`}
             >
                 <span class="w-4 h-4 flex items-center justify-center" aria-hidden="true">
                     <i class="fas fa-phone-alt text-dark"></i>
                 </span>
-                <span>Call us: +1 271 281 9795</span>
+                <span>Call us: {content.phoneNumber}</span>
             </button>
         </div>
     </header>

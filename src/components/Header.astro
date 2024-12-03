@@ -3,6 +3,35 @@ import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/600.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+
+interface NavItem {
+    href: string;
+    text: string;
+    isCurrent?: boolean;
+}
+
+interface SocialLink {
+    href: string;
+    icon: string;
+    label: string;
+}
+
+const navItems: NavItem[] = [
+    { href: "/", text: "Home", isCurrent: true },
+    { href: "/about", text: "About" },
+    { href: "/service", text: "Service" },
+    { href: "/blog", text: "Blog" },
+    { href: "/contact", text: "Contact" }
+];
+
+const socialLinks: SocialLink[] = [
+    { href: "#", icon: "far fa-envelope", label: "Send us an email" },
+    { href: "#", icon: "fab fa-facebook-f", label: "Visit our Facebook page" },
+    { href: "#", icon: "fab fa-instagram", label: "Follow us on Instagram" },
+    { href: "#", icon: "fab fa-twitter", label: "Follow us on Twitter" }
+];
+
+const phoneNumber = "+1 071 281 9795";
 ---
 
 <header class="relative" role="banner">
@@ -14,14 +43,14 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
             <!-- Phone number -->
             <address class="hidden sm:block not-italic">
                 <a
-                    href="tel:+10712819795"
+                    href={`tel:${phoneNumber.replace(/\s+/g, '')}`}
                     class="text-dark text-sm font-semibold leading-[22px] no-underline hover:no-underline flex items-center gap-2"
-                    aria-label="Call us at +1 071 281 9795"
+                    aria-label={`Call us at ${phoneNumber}`}
                 >
                     <span class="w-4 h-4 flex items-center justify-center" aria-hidden="true">
                         <i class="fas fa-phone-alt text-primary"></i>
                     </span>
-                    <span>+1 071 281 9795</span>
+                    <span>{phoneNumber}</span>
                 </a>
             </address>
 
@@ -30,34 +59,15 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
                 class="hidden sm:flex items-center gap-6"
                 aria-label="Social Media Links"
             >
-                <a
-                    href="#"
-                    class="text-dark hover:text-primary transition-colors"
-                    aria-label="Send us an email"
-                >
-                    <i class="far fa-envelope text-sm" aria-hidden="true"></i>
-                </a>
-                <a
-                    href="#"
-                    class="text-dark hover:text-primary transition-colors"
-                    aria-label="Visit our Facebook page"
-                >
-                    <i class="fab fa-facebook-f text-sm" aria-hidden="true"></i>
-                </a>
-                <a
-                    href="#"
-                    class="text-dark hover:text-primary transition-colors"
-                    aria-label="Follow us on Instagram"
-                >
-                    <i class="fab fa-instagram text-sm" aria-hidden="true"></i>
-                </a>
-                <a
-                    href="#"
-                    class="text-dark hover:text-primary transition-colors"
-                    aria-label="Follow us on Twitter"
-                >
-                    <i class="fab fa-twitter text-sm" aria-hidden="true"></i>
-                </a>
+                {socialLinks.map(({ href, icon, label }) => (
+                    <a
+                        href={href}
+                        class="text-dark hover:text-primary transition-colors"
+                        aria-label={label}
+                    >
+                        <i class={`${icon} text-sm`} aria-hidden="true"></i>
+                    </a>
+                ))}
             </nav>
         </div>
     </div>
@@ -98,42 +108,15 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
                     aria-label="Main Navigation"
                 >
                     <ul class="flex gap-10 list-none" role="list">
-                        <li>
-                            <a
-                                href="/"
-                                class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
-                                aria-current="page"
-                                >Home</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="/about"
-                                class="text-primary text-base font-medium leading-6"
-                                >About</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="/service"
-                                class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
-                                >Service</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="/blog"
-                                class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
-                                >Blog</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="/contact"
-                                class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
-                                >Contact</a
-                            >
-                        </li>
+                        {navItems.map(({ href, text, isCurrent }) => (
+                            <li>
+                                <a
+                                    href={href}
+                                    class={`text-${isCurrent ? 'primary' : 'dark'} text-base font-medium leading-6 ${!isCurrent ? 'hover:text-primary transition-colors' : ''}`}
+                                    aria-current={isCurrent ? "page" : undefined}
+                                >{text}</a>
+                            </li>
+                        ))}
                     </ul>
                     <button
                         type="button"
@@ -153,42 +136,15 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
                 aria-label="Mobile Navigation"
             >
                 <ul class="flex flex-col gap-4 list-none" role="list">
-                    <li>
-                        <a
-                            href="/"
-                            class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
-                            aria-current="page"
-                            >Home</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href="/about"
-                            class="text-primary text-base font-medium leading-6"
-                            >About</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href="/service"
-                            class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
-                            >Service</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href="/blog"
-                            class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
-                            >Blog</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href="/contact"
-                            class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
-                            >Contact</a
-                        >
-                    </li>
+                    {navItems.map(({ href, text, isCurrent }) => (
+                        <li>
+                            <a
+                                href={href}
+                                class={`text-${isCurrent ? 'primary' : 'dark'} text-base font-medium leading-6 ${!isCurrent ? 'hover:text-primary transition-colors' : ''}`}
+                                aria-current={isCurrent ? "page" : undefined}
+                            >{text}</a>
+                        </li>
+                    ))}
                     <li class="pt-2">
                         <button
                             type="button"
@@ -204,14 +160,14 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
                         <div class="flex flex-col items-center gap-4">
                             <address class="not-italic">
                                 <a
-                                    href="tel:+10712819795"
+                                    href={`tel:${phoneNumber.replace(/\s+/g, '')}`}
                                     class="text-dark text-sm font-semibold leading-[22px] no-underline hover:no-underline flex items-center gap-2"
-                                    aria-label="Call us at +1 071 281 9795"
+                                    aria-label={`Call us at ${phoneNumber}`}
                                 >
                                     <span class="w-4 h-4 flex items-center justify-center" aria-hidden="true">
                                         <i class="fas fa-phone-alt text-primary"></i>
                                     </span>
-                                    <span>+1 071 281 9795</span>
+                                    <span>{phoneNumber}</span>
                                 </a>
                             </address>
 
@@ -220,34 +176,15 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
                                 class="flex items-center justify-center gap-6"
                                 aria-label="Social Media Links"
                             >
-                                <a
-                                    href="#"
-                                    class="text-dark hover:text-primary transition-colors"
-                                    aria-label="Send us an email"
-                                >
-                                    <i class="far fa-envelope text-sm" aria-hidden="true"></i>
-                                </a>
-                                <a
-                                    href="#"
-                                    class="text-dark hover:text-primary transition-colors"
-                                    aria-label="Visit our Facebook page"
-                                >
-                                    <i class="fab fa-facebook-f text-sm" aria-hidden="true"></i>
-                                </a>
-                                <a
-                                    href="#"
-                                    class="text-dark hover:text-primary transition-colors"
-                                    aria-label="Follow us on Instagram"
-                                >
-                                    <i class="fab fa-instagram text-sm" aria-hidden="true"></i>
-                                </a>
-                                <a
-                                    href="#"
-                                    class="text-dark hover:text-primary transition-colors"
-                                    aria-label="Follow us on Twitter"
-                                >
-                                    <i class="fab fa-twitter text-sm" aria-hidden="true"></i>
-                                </a>
+                                {socialLinks.map(({ href, icon, label }) => (
+                                    <a
+                                        href={href}
+                                        class="text-dark hover:text-primary transition-colors"
+                                        aria-label={label}
+                                    >
+                                        <i class={`${icon} text-sm`} aria-hidden="true"></i>
+                                    </a>
+                                ))}
                             </nav>
                         </div>
                     </li>
