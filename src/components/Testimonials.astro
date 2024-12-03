@@ -4,31 +4,31 @@ const testimonials = [
   {
     name: 'Devon Lane',
     location: 'New York',
-    image: 'https://via.placeholder.com/80x80',
+    image: '/images/testimonials/devon-lane.jpg',
     quote: 'Plumby\'s service was amazing! They arrived on time and quickly identified the problem with our pipes. They explained everything in detail and fixed the issue within an hour.',
   },
   {
     name: 'Rosemary Sherman',
     location: 'New York',
-    image: 'https://via.placeholder.com/80x80',
+    image: '/images/testimonials/rosemary-sherman.jpg',
     quote: 'Plumby\'s service was amazing! They arrived on time and quickly identified the problem with our pipes. They explained everything in detail and fixed the issue within an hour.',
   },
   {
     name: 'Domingo Flores',
     location: 'New York',
-    image: 'https://via.placeholder.com/80x80',
+    image: '/images/testimonials/domingo-flores.jpg',
     quote: 'I had a great experience with Plumby. Their team arrived on time and did an excellent job repairing my leaky faucet. They were professional, and completed the job quickly.',
   },
   {
     name: 'Deborah Carr',
     location: 'New York',
-    image: 'https://via.placeholder.com/80x80',
+    image: '/images/testimonials/deborah-carr.jpg',
     quote: 'I had a serious plumbing emergency in the middle of the night and Plumby was there to save the day. Their emergency service was prompt & life-saving.',
   },
   {
     name: 'Fernando Sims',
     location: 'New York',
-    image: 'https://via.placeholder.com/80x80',
+    image: '/images/testimonials/fernando-sims.jpg',
     quote: 'Plumby\'s service was amazing! They arrived on time and quickly identified the problem with our pipes. They explained everything in detail and fixed the issue within an hour.',
   }
 ];
@@ -45,31 +45,61 @@ const testimonials = [
     </header>
 
     <div class="testimonials-grid">
-      {testimonials.map((testimonial) => (
-        <article class="testimonial-card">
-          <img 
-            src={testimonial.image} 
-            alt={`Portrait of ${testimonial.name}`} 
-            class="testimonial-avatar" 
-            width="80" 
-            height="80" 
-          />
-          <div class="testimonial-content">
-            <div class="testimonial-rating" aria-label="5 out of 5 stars">
-              {[...Array(5)].map(() => (
-                <span class="star" aria-hidden="true"></span>
-              ))}
+      <div class="fade-left" aria-hidden="true"></div>
+      <div class="fade-right" aria-hidden="true"></div>
+      <div class="testimonials-scroll">
+        {testimonials.map((testimonial) => (
+          <article class="testimonial-card">
+            <img 
+              src={testimonial.image} 
+              alt={`Portrait of ${testimonial.name}`} 
+              class="testimonial-avatar" 
+              width="80" 
+              height="80" 
+            />
+            <div class="testimonial-content">
+              <div class="testimonial-rating" aria-label="5 out of 5 stars">
+                {[...Array(5)].map(() => (
+                  <img src="/images/star.png" alt="star" class="star" aria-hidden="true" />
+                ))}
+              </div>
+              <blockquote class="testimonial-quote">
+                {testimonial.quote}
+              </blockquote>
+              <footer class="testimonial-author">
+                <span class="author-name">{testimonial.name}</span>
+                <span class="author-location">{testimonial.location}</span>
+              </footer>
             </div>
-            <blockquote class="testimonial-quote">
-              {testimonial.quote}
-            </blockquote>
-            <footer class="testimonial-author">
-              <span class="author-name">{testimonial.name}</span>
-              <span class="author-location">{testimonial.location}</span>
-            </footer>
-          </div>
-        </article>
-      ))}
+          </article>
+        ))}
+        {/* Duplicate testimonials for seamless loop */}
+        {testimonials.map((testimonial) => (
+          <article class="testimonial-card">
+            <img 
+              src={testimonial.image} 
+              alt={`Portrait of ${testimonial.name}`} 
+              class="testimonial-avatar" 
+              width="80" 
+              height="80" 
+            />
+            <div class="testimonial-content">
+              <div class="testimonial-rating" aria-label="5 out of 5 stars">
+                {[...Array(5)].map(() => (
+                  <img src="/images/star.png" alt="star" class="star" aria-hidden="true" />
+                ))}
+              </div>
+              <blockquote class="testimonial-quote">
+                {testimonial.quote}
+              </blockquote>
+              <footer class="testimonial-author">
+                <span class="author-name">{testimonial.name}</span>
+                <span class="author-location">{testimonial.location}</span>
+              </footer>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   </div>
 </section>
@@ -112,10 +142,56 @@ const testimonials = [
   }
 
   .testimonials-grid {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 0 20px;
+  }
+
+  .fade-left,
+  .fade-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .fade-left {
+    left: 0;
+    background: linear-gradient(to right, 
+      rgb(255, 255, 255) 0%,
+      rgba(255, 255, 255, 0.95) 35%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  .fade-right {
+    right: 0;
+    background: linear-gradient(to left, 
+      rgb(255, 255, 255) 0%,
+      rgba(255, 255, 255, 0.95) 35%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  .testimonials-scroll {
     display: flex;
     gap: 24px;
-    overflow-x: auto;
-    padding: 0 20px;
+    animation: scroll 60s linear infinite;
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
   .testimonial-card {
@@ -149,9 +225,9 @@ const testimonials = [
   }
 
   .star {
-    width: 18.91px;
-    height: 18.09px;
-    background: #1681FF;
+    width: 19px;
+    height: 19px;
+    object-fit: contain;
   }
 
   .testimonial-quote {
