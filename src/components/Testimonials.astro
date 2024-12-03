@@ -44,12 +44,15 @@ const testimonials = [
       </p>
     </header>
 
-    <div class="testimonials-grid">
+    <div class="testimonials-grid" id="testimonials-scroll-container">
       <div class="fade-left" aria-hidden="true"></div>
       <div class="fade-right" aria-hidden="true"></div>
-      <div class="testimonials-scroll">
-        {testimonials.map((testimonial) => (
-          <article class="testimonial-card">
+      <div class="testimonials-scroll" id="testimonials-scroll">
+        {testimonials.map((testimonial, index) => (
+          <article 
+            class="testimonial-card" 
+            data-testimonial-index={index}
+          >
             <img 
               src={testimonial.image} 
               alt={`Portrait of ${testimonial.name}`} 
@@ -74,8 +77,11 @@ const testimonials = [
           </article>
         ))}
         {/* Duplicate testimonials for seamless loop */}
-        {testimonials.map((testimonial) => (
-          <article class="testimonial-card">
+        {testimonials.map((testimonial, index) => (
+          <article 
+            class="testimonial-card" 
+            data-testimonial-index={index}
+          >
             <img 
               src={testimonial.image} 
               alt={`Portrait of ${testimonial.name}`} 
@@ -104,11 +110,108 @@ const testimonials = [
   </div>
 </section>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('testimonials-scroll-container');
+    const scrollContainer = document.getElementById('testimonials-scroll');
+    let isScrolling = true;
+    let scrollInterval: number | null = null;
+
+    function startScrolling() {
+      // Null checks with type assertion
+      if (scrollContainer instanceof HTMLElement && container instanceof HTMLElement) {
+        const cardElement = scrollContainer.querySelector('.testimonial-card');
+        const cardWidth = cardElement instanceof HTMLElement 
+          ? cardElement.offsetWidth 
+          : 275;
+        const gap = 24; // From CSS
+        const totalWidth = cardWidth + gap;
+
+        scrollInterval = window.setInterval(() => {
+          if (isScrolling) {
+            scrollContainer.scrollLeft += totalWidth;
+            
+            // Reset scroll position when reaching the end
+            if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+              scrollContainer.scrollLeft = 0;
+            }
+          }
+        }, 3000); // Scroll every 3 seconds
+      }
+    }
+
+    function stopScrolling() {
+      if (scrollInterval !== null) {
+        window.clearInterval(scrollInterval);
+        scrollInterval = null;
+      }
+    }
+
+    // Pause on hover with explicit event type
+    const handleMouseEnter = () => {
+      isScrolling = false;
+    };
+
+    const handleMouseLeave = () => {
+      isScrolling = true;
+    };
+
+    // Safely add event listeners
+    if (container) {
+      container.addEventListener('mouseenter', handleMouseEnter);
+      container.addEventListener('mouseleave', handleMouseLeave);
+    }
+
+    // Center selected testimonial on mobile
+    const centerTestimonial = (event: MouseEvent) => {
+      if (window.innerWidth <= 768) {
+        const selectedCard = event.currentTarget as HTMLElement;
+        const scrollContainer = document.getElementById('testimonials-scroll');
+        
+        if (scrollContainer instanceof HTMLElement) {
+          // Calculate the scroll position to center the card
+          const containerWidth = scrollContainer.clientWidth;
+          const cardWidth = selectedCard.offsetWidth;
+          const cardOffsetLeft = selectedCard.offsetLeft;
+          
+          const scrollPosition = cardOffsetLeft - (containerWidth / 2) + (cardWidth / 2);
+          
+          scrollContainer.scrollTo({
+            left: scrollPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+
+    // Add click event to all testimonial cards
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    testimonialCards.forEach(card => {
+      card.addEventListener('click', centerTestimonial as EventListener);
+    });
+
+    // Cleanup function
+    return () => {
+      // Remove event listeners
+      if (container) {
+        container.removeEventListener('mouseenter', handleMouseEnter);
+        container.removeEventListener('mouseleave', handleMouseLeave);
+      }
+
+      stopScrolling();
+      
+      testimonialCards.forEach(card => {
+        card.removeEventListener('click', centerTestimonial as EventListener);
+      });
+    };
+  });
+</script>
+
 <style>
   .testimonials {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 96px 0;
+    padding: 96px 20px;  
     background: white;
   }
 
@@ -117,6 +220,7 @@ const testimonials = [
     flex-direction: column;
     align-items: center;
     gap: 70px;
+    width: 100%;
   }
 
   .testimonials-header {
@@ -144,8 +248,9 @@ const testimonials = [
   .testimonials-grid {
     position: relative;
     width: 100%;
+    max-width: 100%;
     overflow: hidden;
-    padding: 0 20px;
+    padding: 0 20px;  
   }
 
   .fade-left,
@@ -179,19 +284,14 @@ const testimonials = [
   .testimonials-scroll {
     display: flex;
     gap: 24px;
-    animation: scroll 60s linear infinite;
-    &:hover {
-      animation-play-state: paused;
-    }
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
   }
 
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+  .testimonials-scroll::-webkit-scrollbar {
+    display: none; /* WebKit */
   }
 
   .testimonial-card {
@@ -254,6 +354,14 @@ const testimonials = [
   }
 
   @media (max-width: 1200px) {
+    .testimonials {
+      padding: 96px 15px;  
+    }
+
+    .testimonials-grid {
+      padding: 0 15px;
+    }
+
     .testimonials-grid {
       flex-wrap: nowrap;
       overflow-x: scroll;
@@ -278,7 +386,7 @@ const testimonials = [
 
   @media (max-width: 768px) {
     .testimonials {
-      padding: 48px 0;
+      padding: 48px 10px;  
     }
 
     .testimonials-title {
@@ -293,35 +401,96 @@ const testimonials = [
     }
 
     .testimonials-grid {
-      padding: 0;
-      /* Hide scrollbar */
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
+      padding: 0 10px;
+      position: relative;
     }
 
-    .testimonials-grid::-webkit-scrollbar {
-      display: none;  /* Chrome, Safari, and Opera */
+    .fade-left,
+    .fade-right {
+      display: block;
+      width: 50px;
+      background: linear-gradient(to right, 
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    }
+
+    .fade-left {
+      left: 0;
+    }
+
+    .fade-right {
+      right: 0;
+      background: linear-gradient(to left, 
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    }
+
+    /* Mobile overlay effect */
+    .testimonials-grid::before,
+    .testimonials-grid::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50px;
+      z-index: 10;
+      pointer-events: none;
+      background: linear-gradient(to right, 
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    }
+
+    .testimonials-grid::before {
+      left: 0;
+    }
+
+    .testimonials-grid::after {
+      right: 0;
+      background: linear-gradient(to left, 
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0) 100%
+      );
     }
 
     .testimonials-scroll {
-      animation: scroll 40s linear infinite;
-      gap: 16px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .testimonials-scroll {
+      animation: none;
+      gap: 12px;  
       /* Ensure smooth scrolling on mobile */
       -webkit-overflow-scrolling: touch;
       overflow-x: scroll;
       overflow-y: hidden;
       overscroll-behavior-x: contain;
-    }
-
-    .fade-left,
-    .fade-right {
-      width: 50px;
+      scroll-snap-type: x mandatory;
+      scroll-padding: 0 20px;
     }
 
     .testimonial-card {
       width: 250px;
       padding: 16px;
       gap: 16px;
+      scroll-snap-align: center;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .testimonial-card:not(:hover) {
+      opacity: 0.7;
+      transform: scale(0.95);
+    }
+
+    .testimonial-card:hover,
+    .testimonial-card:focus-within {
+      opacity: 1;
+      transform: scale(1.02);
+      z-index: 10;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
 
     .testimonial-avatar {
@@ -350,12 +519,16 @@ const testimonials = [
   }
 
   @media (max-width: 480px) {
-    .testimonials-scroll {
-      animation: scroll 30s linear infinite;
-    }
-
     .testimonial-card {
       width: 220px;
+    }
+
+    .testimonials {
+      padding: 36px 5px;  
+    }
+
+    .testimonials-grid {
+      padding: 0 5px;
     }
   }
 </style>
