@@ -1,0 +1,78 @@
+---
+const services = [
+    {
+        title: "Faucet & Leak Repairs",
+        description: "In the new era of technology we look in the future with certainty and pride, that's why our theme looks so good whatever device.",
+        image: "https://via.placeholder.com/416x275",
+        cta: "See how we do it"
+    },
+    {
+        title: "Remodeling Service",
+        description: "In the new era of technology we look in the future with certainty and priso good whatever device you use for any post types.",
+        image: "https://via.placeholder.com/416x275",
+        cta: "Explore our process"
+    },
+    {
+        title: "Drain Cleaning & Repairs",
+        description: "In the new era of technology we look in the future with certainty and use of the pre-made because they are so great.",
+        image: "https://via.placeholder.com/416x275",
+        cta: "Learn more about this"
+    }
+];
+---
+
+<section class="w-full bg-[#F7F9FB] py-24">
+    <div class="max-w-[1296px] mx-auto px-4 md:px-8">
+        <div class="flex flex-col items-center gap-[70px]">
+            <h2 class="text-[48px] font-satoshi font-bold leading-[54px] text-[#171A1F] text-center">
+                Services We Are Offering
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {services.map(service => (
+                    <article class="flex flex-col gap-[30px]">
+                        <img 
+                            src={service.image} 
+                            alt={service.title}
+                            class="w-full h-[275px] object-cover rounded-2xl"
+                            width="416"
+                            height="275"
+                        />
+                        <div class="flex flex-col gap-[30px]">
+                            <div class="flex flex-col gap-[15px]">
+                                <h3 class="text-[20px] font-semibold leading-7 text-[#171A1F]">
+                                    {service.title}
+                                </h3>
+                                <p class="text-base text-[#495460] leading-6 max-w-[384px]">
+                                    {service.description}
+                                </p>
+                            </div>
+                            <a 
+                                href="#" 
+                                class="inline-flex items-center gap-2.5 text-primary font-semibold py-0.5 hover:text-primary-dark transition-colors"
+                            >
+                                {service.cta}
+                                <svg 
+                                    width="16" 
+                                    height="16" 
+                                    viewBox="0 0 16 16" 
+                                    fill="none" 
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="mt-[1px]"
+                                >
+                                    <path 
+                                        d="M2 8H14M14 8L8 2M14 8L8 14" 
+                                        stroke="currentColor" 
+                                        stroke-width="1.5" 
+                                        stroke-linecap="round" 
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+                ))}
+            </div>
+        </div>
+    </div>
+</section>
