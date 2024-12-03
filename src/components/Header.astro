@@ -5,7 +5,7 @@ import "@fontsource/inter/600.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 ---
 
-<header class="relative">
+<header class="relative" role="banner">
     <!-- Top bar -->
     <div class="w-full py-3 flex justify-center bg-white">
         <div
@@ -16,57 +16,58 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
                 <a
                     href="tel:+10712819795"
                     class="text-dark text-sm font-semibold leading-[22px] no-underline hover:no-underline flex items-center gap-2"
+                    aria-label="Call us at +1 071 281 9795"
                 >
-                    <span class="w-4 h-4 flex items-center justify-center">
+                    <span class="w-4 h-4 flex items-center justify-center" aria-hidden="true">
                         <i class="fas fa-phone-alt text-primary"></i>
                     </span>
-                    +1 071 281 9795
+                    <span>+1 071 281 9795</span>
                 </a>
             </address>
 
             <!-- Social Media Links -->
             <nav
                 class="hidden sm:flex items-center gap-6"
-                aria-label="Social Media"
+                aria-label="Social Media Links"
             >
                 <a
                     href="#"
                     class="text-dark hover:text-primary transition-colors"
-                    aria-label="Email us"
+                    aria-label="Send us an email"
                 >
-                    <i class="far fa-envelope text-sm"></i>
+                    <i class="far fa-envelope text-sm" aria-hidden="true"></i>
                 </a>
                 <a
                     href="#"
                     class="text-dark hover:text-primary transition-colors"
-                    aria-label="Visit our Facebook"
+                    aria-label="Visit our Facebook page"
                 >
-                    <i class="fab fa-facebook-f text-sm"></i>
+                    <i class="fab fa-facebook-f text-sm" aria-hidden="true"></i>
                 </a>
                 <a
                     href="#"
                     class="text-dark hover:text-primary transition-colors"
                     aria-label="Follow us on Instagram"
                 >
-                    <i class="fab fa-instagram text-sm"></i>
+                    <i class="fab fa-instagram text-sm" aria-hidden="true"></i>
                 </a>
                 <a
                     href="#"
                     class="text-dark hover:text-primary transition-colors"
                     aria-label="Follow us on Twitter"
                 >
-                    <i class="fab fa-twitter text-sm"></i>
+                    <i class="fab fa-twitter text-sm" aria-hidden="true"></i>
                 </a>
             </nav>
         </div>
     </div>
-    <hr class="hidden sm:block w-full h-px bg-divider border-0" />
+    <hr class="hidden sm:block w-full h-px bg-divider border-0" role="separator" aria-hidden="true" />
 
     <!-- Main header -->
     <div class="w-full flex justify-center py-4">
         <div class="w-full max-w-[1296px] px-4">
             <div class="flex flex-row justify-between items-center">
-                <a href="/" class="flex items-center gap-3">
+                <a href="/" class="flex items-center gap-3" aria-label="Plumby - Home">
                     <span
                         class="flex items-center text-[38px] text-primary"
                         aria-hidden="true"
@@ -83,22 +84,25 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
                 <button
                     type="button"
                     class="md:hidden text-dark hover:text-primary transition-colors"
-                    aria-label="Toggle menu"
+                    aria-label="Toggle navigation menu"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu"
                     onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
                 >
-                    <i class="fas fa-bars text-2xl"></i>
+                    <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
                 </button>
 
                 <!-- Desktop navigation -->
                 <nav
                     class="hidden md:flex items-center gap-10"
-                    aria-label="Main navigation"
+                    aria-label="Main Navigation"
                 >
-                    <ul class="flex gap-10 list-none">
+                    <ul class="flex gap-10 list-none" role="list">
                         <li>
                             <a
                                 href="/"
                                 class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
+                                aria-current="page"
                                 >Home</a
                             >
                         </li>
@@ -135,6 +139,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
                         type="button"
                         onclick="window.location.href='/request-call'"
                         class="bg-primary text-white text-base font-semibold leading-6 px-[18px] py-3 rounded-lg hover:bg-primary/90 transition-colors whitespace-nowrap"
+                        aria-label="Request a free call"
                     >
                         Request A Free Call
                     </button>
@@ -145,13 +150,14 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
             <nav
                 id="mobile-menu"
                 class="hidden w-full md:hidden pt-4"
-                aria-label="Mobile navigation"
+                aria-label="Mobile Navigation"
             >
-                <ul class="flex flex-col gap-4 list-none">
+                <ul class="flex flex-col gap-4 list-none" role="list">
                     <li>
                         <a
                             href="/"
                             class="text-dark hover:text-primary text-base font-medium leading-6 transition-colors"
+                            aria-current="page"
                             >Home</a
                         >
                     </li>
@@ -188,6 +194,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
                             type="button"
                             onclick="window.location.href='/request-call'"
                             class="w-full bg-primary text-white text-base font-semibold leading-6 px-[18px] py-3 rounded-lg hover:bg-primary/90 transition-colors"
+                            aria-label="Request a free call"
                         >
                             Request A Free Call
                         </button>
@@ -199,47 +206,47 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
                                 <a
                                     href="tel:+10712819795"
                                     class="text-dark text-sm font-semibold leading-[22px] no-underline hover:no-underline flex items-center gap-2"
+                                    aria-label="Call us at +1 071 281 9795"
                                 >
-                                    <span class="w-4 h-4 flex items-center justify-center">
-                                        <i class="fas fa-phone-alt text-primary"
-                                        ></i>
+                                    <span class="w-4 h-4 flex items-center justify-center" aria-hidden="true">
+                                        <i class="fas fa-phone-alt text-primary"></i>
                                     </span>
-                                    +1 071 281 9795
+                                    <span>+1 071 281 9795</span>
                                 </a>
                             </address>
 
                             <!-- Social Media Links -->
                             <nav
                                 class="flex items-center justify-center gap-6"
-                                aria-label="Social Media"
+                                aria-label="Social Media Links"
                             >
                                 <a
                                     href="#"
                                     class="text-dark hover:text-primary transition-colors"
-                                    aria-label="Email us"
+                                    aria-label="Send us an email"
                                 >
-                                    <i class="far fa-envelope text-sm"></i>
+                                    <i class="far fa-envelope text-sm" aria-hidden="true"></i>
                                 </a>
                                 <a
                                     href="#"
                                     class="text-dark hover:text-primary transition-colors"
-                                    aria-label="Visit our Facebook"
+                                    aria-label="Visit our Facebook page"
                                 >
-                                    <i class="fab fa-facebook-f text-sm"></i>
+                                    <i class="fab fa-facebook-f text-sm" aria-hidden="true"></i>
                                 </a>
                                 <a
                                     href="#"
                                     class="text-dark hover:text-primary transition-colors"
                                     aria-label="Follow us on Instagram"
                                 >
-                                    <i class="fab fa-instagram text-sm"></i>
+                                    <i class="fab fa-instagram text-sm" aria-hidden="true"></i>
                                 </a>
                                 <a
                                     href="#"
                                     class="text-dark hover:text-primary transition-colors"
                                     aria-label="Follow us on Twitter"
                                 >
-                                    <i class="fab fa-twitter text-sm"></i>
+                                    <i class="fab fa-twitter text-sm" aria-hidden="true"></i>
                                 </a>
                             </nav>
                         </div>
@@ -249,3 +256,23 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
         </div>
     </div>
 </header>
+
+<script>
+    const mobileMenuButton = document.querySelector('button[aria-controls="mobile-menu"]');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+            mobileMenuButton.setAttribute('aria-expanded', (!isExpanded).toString());
+            mobileMenu.classList.toggle('hidden');
+            
+            // Toggle icon between bars and times
+            const icon = mobileMenuButton.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            }
+        });
+    }
+</script>
