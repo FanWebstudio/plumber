@@ -36,12 +36,12 @@ const phoneNumber = "+1 071 281 9795";
 
 <header class="relative" role="banner">
     <!-- Top bar -->
-    <div class="w-full py-3 flex justify-center bg-white">
+    <div class="hidden md:block w-full py-3 bg-white">
         <div
-            class="w-full max-w-[1295.81px] px-4 flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-0"
+            class="w-full max-w-[1295.81px] mx-auto px-4 flex justify-between items-center"
         >
             <!-- Phone number -->
-            <address class="hidden sm:block not-italic">
+            <address class="not-italic">
                 <a
                     href={`tel:${phoneNumber.replace(/\s+/g, '')}`}
                     class="text-dark text-sm font-semibold leading-[22px] no-underline hover:no-underline flex items-center gap-2"
@@ -54,21 +54,22 @@ const phoneNumber = "+1 071 281 9795";
                 </a>
             </address>
 
-            <!-- Social Media Links -->
-            <nav
-                class="hidden sm:flex items-center gap-6"
-                aria-label="Social Media Links"
-            >
-                {socialLinks.map(({ href, icon, label }) => (
-                    <a
-                        href={href}
-                        class="text-dark hover:text-primary transition-colors"
-                        aria-label={label}
-                    >
-                        <i class={`${icon} text-sm`} aria-hidden="true"></i>
-                    </a>
-                ))}
-            </nav>
+            <!-- Social links -->
+            <ul class="flex items-center gap-6 list-none" role="list">
+                {
+                    socialLinks.map(({ href, icon, label }) => (
+                        <li>
+                            <a
+                                href={href}
+                                class="w-4 h-4 flex items-center justify-center text-dark hover:text-primary transition-colors"
+                                aria-label={label}
+                            >
+                                <i class={icon} aria-hidden="true" />
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
         </div>
     </div>
     <hr class="hidden sm:block w-full h-px bg-divider border-0" role="separator" aria-hidden="true" />
