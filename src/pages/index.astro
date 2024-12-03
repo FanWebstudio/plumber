@@ -6,13 +6,9 @@ import About from "../components/About.astro";
 ---
 
 <Layout title="Plumby - Professional Plumbing Services">
-	<div class="relative">
-		<div class="fixed top-0 left-0 right-0 z-50 bg-white">
-			<Header />
-		</div>
-		<main class="pt-[72px]">
-			<Hero />
-			<About />
-		</main>
-	</div>
+	<Header />
+	<main>
+		<Hero />
+		<About />
+	</main>
 </Layout>

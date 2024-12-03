@@ -84,7 +84,7 @@ const phoneNumber = "+1 071 281 9795";
 
     <!-- Navigation wrapper -->
     <div
-        class="bg-white shadow-sm transition-shadow duration-300 w-full"
+        class="bg-white w-full"
         id="sticky-nav"
     >
         <!-- Main navigation -->
@@ -272,14 +272,4 @@ const phoneNumber = "+1 071 281 9795";
 
     // Run initialization when DOM is ready
     document.addEventListener("DOMContentLoaded", initMobileMenu);
-
-    // Add scroll event listener to handle shadow
-    window.addEventListener("scroll", () => {
-        const nav = document.getElementById("sticky-nav");
-        if (window.scrollY > 0) {
-            nav?.classList.add("shadow-md");
-        } else {
-            nav?.classList.remove("shadow-md");
-        }
-    });
 </script>
