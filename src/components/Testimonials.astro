@@ -1,6 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-import type { TestimonialData } from '../types/Testimonial';
+import { Image } from "astro:assets";
+import type { TestimonialData } from "../types/Testimonial";
 
 interface Props {
   testimonials: TestimonialData[];
@@ -10,40 +10,44 @@ const { testimonials } = Astro.props;
 
 const testimonialData = [
   {
-    name: 'Devon Lane',
-    location: 'New York',
-    avatar: '/images/testimonials/devon-lane.jpg',
-    quote: 'Plumby\'s service was amazing! They arrived on time and quickly identified the problem with our pipes. They explained everything in detail and fixed the issue within an hour.',
+    name: "Devon Lane",
+    location: "New York",
+    avatar: "/images/testimonials/devon-lane.jpg",
+    quote:
+      "Plumby's service was amazing! They arrived on time and quickly identified the problem with our pipes. They explained everything in detail and fixed the issue within an hour.",
   },
   {
-    name: 'Rosemary Sherman',
-    location: 'New York',
-    avatar: '/images/testimonials/rosemary-sherman.jpg',
-    quote: 'Plumby\'s service was amazing! They arrived on time and quickly identified the problem with our pipes. They explained everything in detail and fixed the issue within an hour.',
+    name: "Rosemary Sherman",
+    location: "New York",
+    avatar: "/images/testimonials/rosemary-sherman.jpg",
+    quote:
+      "Plumby's service was amazing! They arrived on time and quickly identified the problem with our pipes. They explained everything in detail and fixed the issue within an hour.",
   },
   {
-    name: 'Domingo Flores',
-    location: 'New York',
-    avatar: '/images/testimonials/domingo-flores.jpg',
-    quote: 'I had a great experience with Plumby. Their team arrived on time and did an excellent job repairing my leaky faucet. They were professional, and completed the job quickly.',
+    name: "Domingo Flores",
+    location: "New York",
+    avatar: "/images/testimonials/domingo-flores.jpg",
+    quote:
+      "I had a great experience with Plumby. Their team arrived on time and did an excellent job repairing my leaky faucet. They were professional, and completed the job quickly.",
   },
   {
-    name: 'Deborah Carr',
-    location: 'New York',
-    avatar: '/images/testimonials/deborah-carr.jpg',
-    quote: 'I had a serious plumbing emergency in the middle of the night and Plumby was there to save the day. Their emergency service was prompt & life-saving.',
+    name: "Deborah Carr",
+    location: "New York",
+    avatar: "/images/testimonials/deborah-carr.jpg",
+    quote:
+      "I had a serious plumbing emergency in the middle of the night and Plumby was there to save the day. Their emergency service was prompt & life-saving.",
   },
   {
-    name: 'Fernando Sims',
-    location: 'New York',
-    avatar: '/images/testimonials/fernando-sims.jpg',
-    quote: 'Plumby\'s service was amazing! They arrived on time and quickly identified the problem with our pipes. They explained everything in detail and fixed the issue within an hour.',
-  }
+    name: "Fernando Sims",
+    location: "New York",
+    avatar: "/images/testimonials/fernando-sims.jpg",
+    quote:
+      "Plumby's service was amazing! They arrived on time and quickly identified the problem with our pipes. They explained everything in detail and fixed the issue within an hour.",
+  },
 ];
-
 ---
 
-<section class="max-w-[1600px] mx-auto py-24 px-5 bg-white">
+<section class="max-w-[1600px] mx-auto py-24 px-4 md:px-8 lg:px-20 bg-white">
   <div class="flex flex-col items-center w-full gap-[70px]">
     <header class="flex flex-col items-center text-center gap-4">
       <h2 class="text-[48px] font-bold text-[#171A1F] leading-[54px]">
@@ -54,101 +58,111 @@ const testimonialData = [
       </p>
     </header>
 
-    <div class="relative w-full max-w-full overflow-hidden px-5">
-      {/* Fade Left */}
-      <div class="absolute top-0 bottom-0 left-0 w-[250px] z-10 pointer-events-none bg-gradient-to-r from-white via-white/95 to-transparent"></div>
-      
-      {/* Fade Right */}
-      <div class="absolute top-0 bottom-0 right-0 w-[250px] z-10 pointer-events-none bg-gradient-to-l from-white via-white/95 to-transparent"></div>
-      
+    <div class="relative w-full max-w-full overflow-hidden px-0">
+      {/* Fade Left - Desktop Only */}
+      <div
+        class="hidden md:block absolute top-0 bottom-0 left-0 w-[250px] z-10 pointer-events-none bg-gradient-to-r from-white via-white/95 to-transparent"
+      >
+      </div>
+
+      {/* Fade Right - Desktop Only */}
+      <div
+        class="hidden md:block absolute top-0 bottom-0 right-0 w-[250px] z-10 pointer-events-none bg-gradient-to-l from-white via-white/95 to-transparent"
+      >
+      </div>
+
       <div 
         id="testimonials-scroll-container" 
         class="relative w-full"
       >
         <div 
           id="testimonials-scroll" 
-          class="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide"
+          class="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide px-4"
         >
-          {testimonialData.map((testimonial, index) => (
-            <article 
-              class="flex-shrink-0 w-[275px] p-6 bg-white border border-[#E2E7EC] rounded-lg flex flex-col gap-6 hover:scale-105 transition-transform duration-300"
-              data-testimonial-index={index}
-            >
-              <Image 
-                src={testimonial.avatar} 
-                alt={`Portrait of ${testimonial.name}`} 
-                class="w-20 h-20 rounded-full object-cover" 
-                width={80} 
-                height={80} 
-              />
-              <div class="flex flex-col gap-4">
-                <div class="flex items-center gap-[7px]">
-                  {[...Array(5)].map(() => (
-                    <Image 
-                      src="/images/star.png" 
-                      alt="star" 
-                      class="w-[19px] h-[19px] object-contain" 
-                      width={19} 
-                      height={19} 
-                      aria-hidden="true" 
-                    />
-                  ))}
+          {
+            testimonialData.map((testimonial, index) => (
+              <article
+                class="flex-shrink-0 w-[275px] p-6 bg-white border border-[#E2E7EC] rounded-lg flex flex-col gap-6 hover:scale-105 transition-transform duration-300"
+                data-testimonial-index={index}
+              >
+                <Image
+                  src={testimonial.avatar}
+                  alt={`Portrait of ${testimonial.name}`}
+                  class="w-20 h-20 rounded-full object-cover"
+                  width={80}
+                  height={80}
+                />
+                <div class="flex flex-col gap-4">
+                  <div class="flex items-center gap-[7px]">
+                    {[...Array(5)].map(() => (
+                      <Image
+                        src="/images/star.png"
+                        alt="star"
+                        class="w-[19px] h-[19px] object-contain"
+                        width={19}
+                        height={19}
+                        aria-hidden="true"
+                      />
+                    ))}
+                  </div>
+                  <blockquote class="text-base text-[#171A1F] leading-6">
+                    {testimonial.quote}
+                  </blockquote>
+                  <footer class="flex items-center gap-[10px]">
+                    <span class="text-base font-semibold text-[#171A1F]">
+                      {testimonial.name}
+                    </span>
+                    <span class="text-base text-[#495460]">
+                      {testimonial.location}
+                    </span>
+                  </footer>
                 </div>
-                <blockquote class="text-base text-[#171A1F] leading-6">
-                  {testimonial.quote}
-                </blockquote>
-                <footer class="flex items-center gap-[10px]">
-                  <span class="text-base font-semibold text-[#171A1F]">
-                    {testimonial.name}
-                  </span>
-                  <span class="text-base text-[#495460]">
-                    {testimonial.location}
-                  </span>
-                </footer>
-              </div>
-            </article>
-          ))}
-          
+              </article>
+            ))
+          }
+
           {/* Duplicate testimonials for seamless loop */}
-          {testimonialData.map((testimonial, index) => (
-            <article 
-              class="flex-shrink-0 w-[275px] p-6 bg-white border border-[#E2E7EC] rounded-lg flex flex-col gap-6 hover:scale-105 transition-transform duration-300"
-              data-testimonial-index={index}
-            >
-              <Image 
-                src={testimonial.avatar} 
-                alt={`Portrait of ${testimonial.name}`} 
-                class="w-20 h-20 rounded-full object-cover" 
-                width={80} 
-                height={80} 
-              />
-              <div class="flex flex-col gap-4">
-                <div class="flex items-center gap-[7px]">
-                  {[...Array(5)].map(() => (
-                    <Image 
-                      src="/images/star.png" 
-                      alt="star" 
-                      class="w-[19px] h-[19px] object-contain" 
-                      width={19} 
-                      height={19} 
-                      aria-hidden="true" 
-                    />
-                  ))}
+          {
+            testimonialData.map((testimonial, index) => (
+              <article
+                class="flex-shrink-0 w-[275px] p-6 bg-white border border-[#E2E7EC] rounded-lg flex flex-col gap-6 hover:scale-105 transition-transform duration-300"
+                data-testimonial-index={index}
+              >
+                <Image
+                  src={testimonial.avatar}
+                  alt={`Portrait of ${testimonial.name}`}
+                  class="w-20 h-20 rounded-full object-cover"
+                  width={80}
+                  height={80}
+                />
+                <div class="flex flex-col gap-4">
+                  <div class="flex items-center gap-[7px]">
+                    {[...Array(5)].map(() => (
+                      <Image
+                        src="/images/star.png"
+                        alt="star"
+                        class="w-[19px] h-[19px] object-contain"
+                        width={19}
+                        height={19}
+                        aria-hidden="true"
+                      />
+                    ))}
+                  </div>
+                  <blockquote class="text-base text-[#171A1F] leading-6">
+                    {testimonial.quote}
+                  </blockquote>
+                  <footer class="flex items-center gap-[10px]">
+                    <span class="text-base font-semibold text-[#171A1F]">
+                      {testimonial.name}
+                    </span>
+                    <span class="text-base text-[#495460]">
+                      {testimonial.location}
+                    </span>
+                  </footer>
                 </div>
-                <blockquote class="text-base text-[#171A1F] leading-6">
-                  {testimonial.quote}
-                </blockquote>
-                <footer class="flex items-center gap-[10px]">
-                  <span class="text-base font-semibold text-[#171A1F]">
-                    {testimonial.name}
-                  </span>
-                  <span class="text-base text-[#495460]">
-                    {testimonial.location}
-                  </span>
-                </footer>
-              </div>
-            </article>
-          ))}
+              </article>
+            ))
+          }
         </div>
       </div>
     </div>
@@ -156,25 +170,36 @@ const testimonialData = [
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('testimonials-scroll-container');
-    const scrollContainer = document.getElementById('testimonials-scroll');
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("testimonials-scroll-container");
+    const scrollContainer = document.getElementById("testimonials-scroll");
     let isScrolling = true;
     let scrollInterval: number | null = null;
 
     function startScrolling() {
-      if (scrollContainer instanceof HTMLElement && container instanceof HTMLElement) {
-        const cardElement = scrollContainer.querySelector('.testimonial-card') as HTMLElement;
+      if (
+        scrollContainer instanceof HTMLElement &&
+        container instanceof HTMLElement
+      ) {
+        const cardElement = scrollContainer.querySelector(
+          ".testimonial-card",
+        ) as HTMLElement;
         const cardWidth = cardElement ? cardElement.offsetWidth : 275;
         const gap = 24; // From CSS
         const totalWidth = cardWidth + gap;
+        const totalScrollWidth = scrollContainer.scrollWidth;
 
         scrollInterval = window.setInterval(() => {
           if (isScrolling) {
+            // Increment scroll position
             scrollContainer.scrollLeft += totalWidth;
-            
-            // Reset scroll position when reaching the end
-            if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+
+            // Check if we've reached the end of scrollable content
+            if (
+              scrollContainer.scrollLeft >=
+              totalScrollWidth - scrollContainer.clientWidth
+            ) {
+              // Reset to the beginning instantly
               scrollContainer.scrollLeft = 0;
             }
           }
@@ -198,47 +223,48 @@ const testimonialData = [
     };
 
     if (container) {
-      container.addEventListener('mouseenter', handleMouseEnter);
-      container.addEventListener('mouseleave', handleMouseLeave);
+      container.addEventListener("mouseenter", handleMouseEnter);
+      container.addEventListener("mouseleave", handleMouseLeave);
     }
 
     const centerTestimonial = (event: MouseEvent) => {
       if (window.innerWidth <= 768) {
         const selectedCard = event.currentTarget as HTMLElement;
-        const scrollContainer = document.getElementById('testimonials-scroll');
-        
+        const scrollContainer = document.getElementById("testimonials-scroll");
+
         if (scrollContainer instanceof HTMLElement) {
           const containerWidth = scrollContainer.clientWidth;
           const cardWidth = selectedCard.offsetWidth;
           const cardOffsetLeft = selectedCard.offsetLeft;
-          
-          const scrollPosition = cardOffsetLeft - (containerWidth / 2) + (cardWidth / 2);
-          
+
+          const scrollPosition =
+            cardOffsetLeft - containerWidth / 2 + cardWidth / 2;
+
           scrollContainer.scrollTo({
             left: scrollPosition,
-            behavior: 'smooth'
+            behavior: "smooth",
           });
         }
       }
     };
 
-    const testimonialCards = document.querySelectorAll('.testimonial-card');
-    testimonialCards.forEach(card => {
-      card.addEventListener('click', centerTestimonial as EventListener);
+    const testimonialCards = document.querySelectorAll(".testimonial-card");
+    testimonialCards.forEach((card) => {
+      card.addEventListener("click", centerTestimonial as EventListener);
     });
 
     startScrolling();
 
     return () => {
       if (container) {
-        container.removeEventListener('mouseenter', handleMouseEnter);
-        container.removeEventListener('mouseleave', handleMouseLeave);
+        container.removeEventListener("mouseenter", handleMouseEnter);
+        container.removeEventListener("mouseleave", handleMouseLeave);
       }
 
       stopScrolling();
-      
-      testimonialCards.forEach(card => {
-        card.removeEventListener('click', centerTestimonial as EventListener);
+
+      testimonialCards.forEach((card) => {
+        card.removeEventListener("click", centerTestimonial as EventListener);
       });
     };
   });
@@ -250,8 +276,8 @@ const testimonialData = [
     display: none;
   }
   .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 
   /* Responsive adjustments */
