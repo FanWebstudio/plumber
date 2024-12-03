@@ -97,7 +97,7 @@ const phoneNumber = "+1 071 281 9795";
                     aria-label="Toggle navigation menu"
                     aria-expanded="false"
                     aria-controls="mobile-menu"
-                    onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
+                    id="mobile-menu-button"
                 >
                     <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
                 </button>
@@ -195,21 +195,33 @@ const phoneNumber = "+1 071 281 9795";
 </header>
 
 <script>
-    const mobileMenuButton = document.querySelector('button[aria-controls="mobile-menu"]');
-    const mobileMenu = document.getElementById('mobile-menu');
+    // TypeScript type definitions
+    type MobileMenuElements = {
+        button: HTMLButtonElement;
+        menu: HTMLElement;
+        icon: HTMLElement;
+    };
 
-    if (mobileMenuButton && mobileMenu) {
-        mobileMenuButton.addEventListener('click', () => {
-            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-            mobileMenuButton.setAttribute('aria-expanded', (!isExpanded).toString());
-            mobileMenu.classList.toggle('hidden');
-            
-            // Toggle icon between bars and times
-            const icon = mobileMenuButton.querySelector('i');
-            if (icon) {
-                icon.classList.toggle('fa-bars');
-                icon.classList.toggle('fa-times');
-            }
-        });
+    // Function to toggle menu state
+    function toggleMenu({ button, menu, icon }: MobileMenuElements): void {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', (!isExpanded).toString());
+        menu.classList.toggle('hidden');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
     }
+
+    // Initialize mobile menu
+    function initMobileMenu(): void {
+        const button = document.getElementById('mobile-menu-button') as HTMLButtonElement;
+        const menu = document.getElementById('mobile-menu') as HTMLElement;
+        const icon = button.querySelector('i') as HTMLElement;
+
+        if (button && menu && icon) {
+            button.addEventListener('click', () => toggleMenu({ button, menu, icon }));
+        }
+    }
+
+    // Run initialization when DOM is ready
+    document.addEventListener('DOMContentLoaded', initMobileMenu);
 </script>
