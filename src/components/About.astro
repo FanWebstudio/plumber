@@ -17,20 +17,22 @@ const rightFeatures: Feature[] = [
 ];
 ---
 
-<section class="w-full py-[120px] bg-white" aria-labelledby="about-title">
-    <div class="w-full max-w-[1296px] mx-auto px-4">
-        <div class="flex flex-col lg:flex-row gap-8 lg:gap-[152px] items-center">
+<section class="w-full py-16 sm:py-20 lg:py-[120px] bg-white" aria-labelledby="about-title">
+    <div class="w-full max-w-[1296px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+            class="flex flex-col lg:flex-row gap-12 lg:gap-[152px] items-center"
+        >
             <!-- Left content -->
-            <article class="w-full lg:w-[549px] flex flex-col gap-20">
+            <article class="w-full lg:w-[549px] flex flex-col gap-12 lg:gap-20">
                 <!-- Text content -->
-                <header class="flex flex-col gap-6">
+                <header class="flex flex-col gap-4 sm:gap-6">
                     <h2
                         id="about-title"
-                        class="text-[32px] sm:text-[48px] text-dark font-satoshi font-bold leading-[1.125]"
+                        class="text-[28px] sm:text-[32px] lg:text-[48px] text-dark font-satoshi font-bold leading-[1.125]"
                     >
                         We Focus on Customer Satisfaction and Quality
                     </h2>
-                    <p class="text-[#495460] text-base font-normal leading-6">
+                    <p class="text-[#495460] text-sm sm:text-base font-normal leading-6 max-w-[90%] sm:max-w-none">
                         Use and re-use tons of responsive sections too a main
                         create the perfect layout. Sections are firmly of
                         organised into the perfect starting categories.
@@ -38,32 +40,32 @@ const rightFeatures: Feature[] = [
                 </header>
 
                 <!-- Features list -->
-                <div class="flex flex-col gap-[30px]">
+                <div class="flex flex-col gap-6 sm:gap-[30px]">
                     <h3
                         id="features-title"
-                        class="text-dark text-xl font-semibold leading-7"
+                        class="text-dark text-lg sm:text-xl font-semibold leading-7"
                     >
                         A snapshot of Plumby's features:
                     </h3>
                     <div
-                        class="grid grid-cols-1 sm:grid-cols-2 gap-x-[72px] gap-y-[15px]"
+                        class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 sm:gap-x-[72px] gap-y-4 sm:gap-y-[15px]"
                         role="list"
                         aria-labelledby="features-title"
                     >
                         <!-- Left features -->
-                        <ul class="flex flex-col gap-[15px] list-none">
+                        <ul class="flex flex-col gap-4 sm:gap-[15px] list-none">
                             {
                                 leftFeatures.map((feature) => (
                                     <li class="flex items-center gap-2">
                                         <span
-                                            class="w-[22px] h-[22px] flex items-center justify-center"
+                                            class="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex items-center justify-center"
                                             aria-hidden="true"
                                         >
                                             <i
-                                                class={`${feature.icon} text-primary`}
+                                                class={`${feature.icon} text-primary text-sm sm:text-base`}
                                             />
                                         </span>
-                                        <span class="text-dark text-base font-medium leading-6">
+                                        <span class="text-dark text-sm sm:text-base font-medium leading-6">
                                             {feature.title}
                                         </span>
                                     </li>
@@ -71,19 +73,19 @@ const rightFeatures: Feature[] = [
                             }
                         </ul>
                         <!-- Right features -->
-                        <ul class="flex flex-col gap-[15px] list-none">
+                        <ul class="flex flex-col gap-4 sm:gap-[15px] list-none">
                             {
                                 rightFeatures.map((feature) => (
                                     <li class="flex items-center gap-2">
                                         <span
-                                            class="w-[22px] h-[22px] flex items-center justify-center"
+                                            class="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex items-center justify-center"
                                             aria-hidden="true"
                                         >
                                             <i
-                                                class={`${feature.icon} text-primary`}
+                                                class={`${feature.icon} text-primary text-sm sm:text-base`}
                                             />
                                         </span>
-                                        <span class="text-dark text-base font-medium leading-6">
+                                        <span class="text-dark text-sm sm:text-base font-medium leading-6">
                                             {feature.title}
                                         </span>
                                     </li>
@@ -95,7 +97,7 @@ const rightFeatures: Feature[] = [
             </article>
 
             <!-- Right image and badge -->
-            <figure class="w-full lg:w-[494px] relative lg:ml-auto">
+            <figure class="w-full max-w-[400px] sm:max-w-[494px] lg:w-[494px] relative lg:ml-auto">
                 <!-- Main image -->
                 <div
                     class="w-full aspect-[494/584] bg-gray-200 rounded-lg overflow-hidden"
@@ -110,7 +112,7 @@ const rightFeatures: Feature[] = [
 
                 <!-- Quality badge -->
                 <div
-                    class="absolute left-[-60px] lg:left-[-90px] top-[50%] translate-y-[-50%] w-[200px] h-[205px] transform -rotate-30"
+                    class="absolute left-[-40px] sm:left-[-60px] lg:left-[-90px] top-[50%] translate-y-[-50%] w-[160px] h-[164px] sm:w-[200px] sm:h-[205px] transform -rotate-30"
                     aria-hidden="true"
                 >
                     <img
