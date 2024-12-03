@@ -3,12 +3,12 @@ import { Image } from "astro:assets";
 import type { TestimonialData } from "../types/Testimonial";
 
 interface Props {
-  testimonials: TestimonialData[];
+  testimonials?: TestimonialData[];
 }
 
-const { testimonials } = Astro.props;
+const { testimonials = [] } = Astro.props;
 
-const testimonialData = [
+const testimonialData = testimonials.length > 0 ? testimonials : [
   {
     name: "Devon Lane",
     location: "New York",
