@@ -1,44 +1,69 @@
 ---
-const services = [
+interface ServiceItem {
+    title: string;
+    description: string;
+    image: string;
+    cta: string;
+    href: string;
+}
+
+const services: ServiceItem[] = [
     {
         title: "Faucet & Leak Repairs",
         description: "In the new era of technology we look in the future with certainty and pride, that's why our theme looks so good whatever device.",
         image: "/images/service-img-1.png",
-        cta: "See how we do it"
+        cta: "See how we do it",
+        href: "/services/faucet-repairs"
     },
     {
         title: "Remodeling Service",
         description: "In the new era of technology we look in the future with certainty and priso good whatever device you use for any post types.",
         image: "/images/service-img-2.png",
-        cta: "Explore our process"
+        cta: "Explore our process",
+        href: "/services/remodeling"
     },
     {
         title: "Drain Cleaning & Repairs",
         description: "In the new era of technology we look in the future with certainty and use of the pre-made because they are so great.",
         image: "/images/service-img-3.png",
-        cta: "Learn more about this"
+        cta: "Learn more about this",
+        href: "/services/drain-cleaning"
     }
 ];
 ---
 
-<section class="w-full bg-[#F7F9FB] py-24">
+<section 
+    class="w-full bg-[#F7F9FB] py-24"
+    aria-labelledby="services-heading"
+>
     <div class="max-w-[1296px] mx-auto px-4 md:px-8">
         <div class="flex flex-col items-center gap-[70px]">
-            <h2 class="text-[48px] font-satoshi font-bold leading-[54px] text-[#171A1F] text-center">
+            <h2 
+                id="services-heading" 
+                class="text-[48px] font-satoshi font-bold leading-[54px] text-[#171A1F] text-center"
+            >
                 Services We Are Offering
             </h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div 
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                role="list"
+            >
                 {services.map(service => (
-                    <article class="flex flex-col gap-[30px]">
+                    <article 
+                        class="flex flex-col gap-[30px] group focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-4 focus-within:ring-offset-[#F7F9FB] rounded-2xl transition-all duration-300"
+                        role="listitem"
+                    >
                         <img 
                             src={service.image} 
-                            alt={service.title}
-                            class="w-full h-[275px] object-cover rounded-2xl"
+                            alt={`${service.title} service illustration`}
+                            class="w-full h-[275px] object-cover rounded-2xl transition-transform duration-300 group-hover:scale-[1.02] group-focus-within:scale-[1.02]"
                             width="416"
                             height="275"
+                            loading="lazy"
+                            decoding="async"
                         />
-                        <div class="flex flex-col gap-[30px]">
+                        <div class="flex flex-col gap-[30px] px-2">
                             <div class="flex flex-col gap-[15px]">
                                 <h3 class="text-[20px] font-semibold leading-7 text-[#171A1F]">
                                     {service.title}
@@ -48,8 +73,9 @@ const services = [
                                 </p>
                             </div>
                             <a 
-                                href="#" 
-                                class="inline-flex items-center gap-2.5 text-primary font-semibold py-0.5 hover:text-primary-dark transition-colors"
+                                href={service.href}
+                                class="group/link inline-flex items-center gap-2.5 text-primary font-semibold py-0.5 hover:text-primary-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded transition-all"
+                                aria-label={`${service.cta} - ${service.title}`}
                             >
                                 {service.cta}
                                 <svg 
@@ -58,7 +84,8 @@ const services = [
                                     viewBox="0 0 16 16" 
                                     fill="none" 
                                     xmlns="http://www.w3.org/2000/svg"
-                                    class="mt-[1px]"
+                                    class="mt-[1px] transition-transform duration-300 group-hover/link:translate-x-1"
+                                    aria-hidden="true"
                                 >
                                     <path 
                                         d="M2 8H14M14 8L8 2M14 8L8 14" 
@@ -76,3 +103,28 @@ const services = [
         </div>
     </div>
 </section>
+
+<style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    article {
+        animation: fadeInUp 0.6s ease-out backwards;
+    }
+
+    article:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    article:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+</style>

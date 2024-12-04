@@ -47,10 +47,16 @@ const testimonialData = testimonials.length > 0 ? testimonials : [
 ];
 ---
 
-<section class="max-w-[1600px] mx-auto py-24 px-4 md:px-8 lg:px-20 bg-white">
+<section 
+  class="max-w-[1600px] mx-auto py-24 px-4 md:px-8 lg:px-20 bg-white"
+  aria-labelledby="testimonials-heading"
+>
   <div class="flex flex-col items-center w-full gap-[70px]">
     <header class="flex flex-col items-center text-center gap-4">
-      <h2 class="text-[48px] font-bold text-[#171A1F] leading-[54px]">
+      <h2 
+        id="testimonials-heading" 
+        class="text-[48px] font-bold text-[#171A1F] leading-[54px]"
+      >
         What Our Clients Say
       </h2>
       <p class="max-w-[614px] text-base text-[#495460] leading-6">
@@ -58,32 +64,43 @@ const testimonialData = testimonials.length > 0 ? testimonials : [
       </p>
     </header>
 
-    <div class="relative w-full max-w-full overflow-hidden px-0">
+    <div 
+      class="relative w-full max-w-full overflow-hidden px-0"
+      aria-roledescription="carousel"
+      aria-label="Customer testimonials carousel"
+    >
       {/* Fade Left - Desktop Only */}
       <div
         class="hidden md:block absolute top-0 bottom-0 left-0 w-[250px] z-10 pointer-events-none bg-gradient-to-r from-white via-white/95 to-transparent"
+        aria-hidden="true"
       >
       </div>
 
       {/* Fade Right - Desktop Only */}
       <div
         class="hidden md:block absolute top-0 bottom-0 right-0 w-[250px] z-10 pointer-events-none bg-gradient-to-l from-white via-white/95 to-transparent"
+        aria-hidden="true"
       >
       </div>
 
       <div 
         id="testimonials-scroll-container" 
         class="relative w-full"
+        role="region"
+        aria-live="polite"
       >
         <div 
           id="testimonials-scroll" 
           class="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide px-4"
+          role="list"
         >
           {
             testimonialData.map((testimonial, index) => (
               <article
-                class="flex-shrink-0 w-[275px] p-6 bg-white border border-[#E2E7EC] rounded-lg flex flex-col gap-6 hover:scale-105 transition-transform duration-300"
+                class="flex-shrink-0 w-[275px] p-6 bg-white border border-[#E2E7EC] rounded-lg flex flex-col gap-6 hover:scale-105 focus-within:scale-105 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 transition-all duration-300"
                 data-testimonial-index={index}
+                role="listitem"
+                aria-label={`Testimonial from ${testimonial.name}`}
               >
                 <Image
                   src={testimonial.avatar}
@@ -91,71 +108,32 @@ const testimonialData = testimonials.length > 0 ? testimonials : [
                   class="w-20 h-20 rounded-full object-cover"
                   width={80}
                   height={80}
+                  loading="lazy"
                 />
                 <div class="flex flex-col gap-4">
-                  <div class="flex items-center gap-[7px]">
-                    {[...Array(5)].map(() => (
+                  <div class="flex items-center gap-[7px]" aria-label={`5 out of 5 stars`}>
+                    {[...Array(5)].map((_, i) => (
                       <Image
                         src="/images/star.png"
-                        alt="star"
+                        alt=""
                         class="w-[19px] h-[19px] object-contain"
                         width={19}
                         height={19}
+                        loading="lazy"
                         aria-hidden="true"
                       />
                     ))}
                   </div>
-                  <blockquote class="text-base text-[#171A1F] leading-6">
-                    {testimonial.quote}
+                  <blockquote>
+                    <p class="text-base text-[#495460] leading-6">
+                      {testimonial.quote}
+                    </p>
                   </blockquote>
-                  <footer class="flex items-center gap-[10px]">
-                    <span class="text-base font-semibold text-[#171A1F]">
+                  <footer class="flex flex-col gap-1">
+                    <cite class="text-base font-semibold text-[#171A1F] leading-6 not-italic">
                       {testimonial.name}
-                    </span>
-                    <span class="text-base text-[#495460]">
-                      {testimonial.location}
-                    </span>
-                  </footer>
-                </div>
-              </article>
-            ))
-          }
-
-          {/* Duplicate testimonials for seamless loop */}
-          {
-            testimonialData.map((testimonial, index) => (
-              <article
-                class="flex-shrink-0 w-[275px] p-6 bg-white border border-[#E2E7EC] rounded-lg flex flex-col gap-6 hover:scale-105 transition-transform duration-300"
-                data-testimonial-index={index}
-              >
-                <Image
-                  src={testimonial.avatar}
-                  alt={`Portrait of ${testimonial.name}`}
-                  class="w-20 h-20 rounded-full object-cover"
-                  width={80}
-                  height={80}
-                />
-                <div class="flex flex-col gap-4">
-                  <div class="flex items-center gap-[7px]">
-                    {[...Array(5)].map(() => (
-                      <Image
-                        src="/images/star.png"
-                        alt="star"
-                        class="w-[19px] h-[19px] object-contain"
-                        width={19}
-                        height={19}
-                        aria-hidden="true"
-                      />
-                    ))}
-                  </div>
-                  <blockquote class="text-base text-[#171A1F] leading-6">
-                    {testimonial.quote}
-                  </blockquote>
-                  <footer class="flex items-center gap-[10px]">
-                    <span class="text-base font-semibold text-[#171A1F]">
-                      {testimonial.name}
-                    </span>
-                    <span class="text-base text-[#495460]">
+                    </cite>
+                    <span class="text-sm text-[#495460] leading-5">
                       {testimonial.location}
                     </span>
                   </footer>
@@ -170,102 +148,100 @@ const testimonialData = testimonials.length > 0 ? testimonials : [
 </section>
 
 <script>
+  interface ScrollConfig {
+    container: HTMLElement;
+    scrollContainer: HTMLElement;
+    scrollAmount: number;
+    scrollDuration: number;
+    pauseOnHover: boolean;
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("testimonials-scroll-container");
     const scrollContainer = document.getElementById("testimonials-scroll");
+    
+    if (!container || !scrollContainer) return;
+
+    const config: ScrollConfig = {
+      container,
+      scrollContainer,
+      scrollAmount: 1,
+      scrollDuration: 30,
+      pauseOnHover: true
+    };
+
     let isScrolling = true;
-    let scrollInterval: number | null = null;
+    let scrollPosition = 0;
+    let animationFrameId: number;
 
-    function startScrolling() {
-      if (
-        scrollContainer instanceof HTMLElement &&
-        container instanceof HTMLElement
-      ) {
-        const cardElement = scrollContainer.querySelector(
-          ".testimonial-card",
-        ) as HTMLElement;
-        const cardWidth = cardElement ? cardElement.offsetWidth : 275;
-        const gap = 24; // From CSS
-        const totalWidth = cardWidth + gap;
-        const totalScrollWidth = scrollContainer.scrollWidth;
+    function scroll() {
+      if (!isScrolling) return;
 
-        scrollInterval = window.setInterval(() => {
-          if (isScrolling) {
-            // Increment scroll position
-            scrollContainer.scrollLeft += totalWidth;
+      scrollPosition += config.scrollAmount;
+      
+      if (scrollPosition >= config.scrollContainer.scrollWidth / 2) {
+        scrollPosition = 0;
+      }
+      
+      config.scrollContainer.scrollLeft = scrollPosition;
+      animationFrameId = requestAnimationFrame(scroll);
+    }
 
-            // Check if we've reached the end of scrollable content
-            if (
-              scrollContainer.scrollLeft >=
-              totalScrollWidth - scrollContainer.clientWidth
-            ) {
-              // Reset to the beginning instantly
-              scrollContainer.scrollLeft = 0;
-            }
-          }
-        }, 3000); // Scroll every 3 seconds
+    function startScroll() {
+      if (!isScrolling) {
+        isScrolling = true;
+        animationFrameId = requestAnimationFrame(scroll);
       }
     }
 
-    function stopScrolling() {
-      if (scrollInterval !== null) {
-        window.clearInterval(scrollInterval);
-        scrollInterval = null;
-      }
-    }
-
-    const handleMouseEnter = () => {
+    function stopScroll() {
       isScrolling = false;
-    };
-
-    const handleMouseLeave = () => {
-      isScrolling = true;
-    };
-
-    if (container) {
-      container.addEventListener("mouseenter", handleMouseEnter);
-      container.addEventListener("mouseleave", handleMouseLeave);
+      cancelAnimationFrame(animationFrameId);
     }
 
-    const centerTestimonial = (event: MouseEvent) => {
-      if (window.innerWidth <= 768) {
-        const selectedCard = event.currentTarget as HTMLElement;
-        const scrollContainer = document.getElementById("testimonials-scroll");
+    // Start scrolling
+    startScroll();
 
-        if (scrollContainer instanceof HTMLElement) {
-          const containerWidth = scrollContainer.clientWidth;
-          const cardWidth = selectedCard.offsetWidth;
-          const cardOffsetLeft = selectedCard.offsetLeft;
+    // Pause on hover/focus
+    if (config.pauseOnHover) {
+      config.container.addEventListener("mouseenter", stopScroll);
+      config.container.addEventListener("mouseleave", startScroll);
+      config.container.addEventListener("focusin", stopScroll);
+      config.container.addEventListener("focusout", startScroll);
+    }
 
-          const scrollPosition =
-            cardOffsetLeft - containerWidth / 2 + cardWidth / 2;
-
-          scrollContainer.scrollTo({
-            left: scrollPosition,
-            behavior: "smooth",
-          });
-        }
+    // Handle visibility change
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopScroll();
+      } else {
+        startScroll();
       }
-    };
-
-    const testimonialCards = document.querySelectorAll(".testimonial-card");
-    testimonialCards.forEach((card) => {
-      card.addEventListener("click", centerTestimonial as EventListener);
     });
 
-    startScrolling();
-
-    return () => {
-      if (container) {
-        container.removeEventListener("mouseenter", handleMouseEnter);
-        container.removeEventListener("mouseleave", handleMouseLeave);
+    // Keyboard navigation
+    config.container.addEventListener("keydown", (e) => {
+      const SCROLL_AMOUNT = 100;
+      
+      switch (e.key) {
+        case "ArrowLeft":
+          e.preventDefault();
+          config.scrollContainer.scrollLeft -= SCROLL_AMOUNT;
+          break;
+        case "ArrowRight":
+          e.preventDefault();
+          config.scrollContainer.scrollLeft += SCROLL_AMOUNT;
+          break;
       }
+    });
 
-      stopScrolling();
-
-      testimonialCards.forEach((card) => {
-        card.removeEventListener("click", centerTestimonial as EventListener);
-      });
+    // Cleanup on unmount
+    return () => {
+      stopScroll();
+      config.container.removeEventListener("mouseenter", stopScroll);
+      config.container.removeEventListener("mouseleave", startScroll);
+      config.container.removeEventListener("focusin", stopScroll);
+      config.container.removeEventListener("focusout", startScroll);
     };
   });
 </script>
