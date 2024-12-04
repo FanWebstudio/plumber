@@ -30,10 +30,10 @@ const navItems: NavItem[] = [
 ];
 
 const socialLinks: SocialLink[] = [
-    { href: "#", icon: "far fa-envelope", label: "Send us an email" },
-    { href: "#", icon: "fab fa-facebook-f", label: "Visit our Facebook page" },
-    { href: "#", icon: "fab fa-instagram", label: "Follow us on Instagram" },
-    { href: "#", icon: "fab fa-twitter", label: "Follow us on Twitter" },
+    { href: "mailto:info@plumby.com", icon: "far fa-envelope", label: "Send us an email" },
+    { href: "https://facebook.com/plumby", icon: "fab fa-facebook-f", label: "Visit our Facebook page" },
+    { href: "https://instagram.com/plumby", icon: "fab fa-instagram", label: "Follow us on Instagram" },
+    { href: "https://twitter.com/plumby", icon: "fab fa-twitter", label: "Follow us on Twitter" },
 ];
 
 const phone: PhoneConfig = {
@@ -42,9 +42,9 @@ const phone: PhoneConfig = {
 };
 ---
 
-<header>
+<header class="w-full fixed top-0 left-0 z-50 bg-white shadow-sm animate-slideDown" style="--header-height: 96px;">
     <!-- Top bar with phone and social links -->
-    <div class="hidden md:block w-full py-3 bg-white">
+    <div class="hidden md:block w-full py-3 bg-white border-b border-divider">
         <div
             class="w-full max-w-[1295.81px] mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center"
         >
@@ -52,16 +52,16 @@ const phone: PhoneConfig = {
             <address class="not-italic">
                 <a
                     href={`tel:${phone.raw}`}
-                    class="text-dark text-sm font-semibold leading-[22px] no-underline hover:text-primary focus:outline-none focus:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-all flex items-center gap-2"
+                    class="group text-dark text-sm font-semibold leading-[22px] no-underline hover:text-primary focus:outline-none focus:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-all flex items-center gap-2"
                     aria-label={`Call us at ${phone.formatted}`}
                 >
                     <span
-                        class="w-4 h-4 flex items-center justify-center"
+                        class="w-4 h-4 flex items-center justify-center group-hover:scale-110 transition-transform"
                         aria-hidden="true"
                     >
                         <i class="fas fa-phone-alt text-primary"></i>
                     </span>
-                    <span>{phone.formatted}</span>
+                    <span class="group-hover:translate-x-0.5 transition-transform">{phone.formatted}</span>
                 </a>
             </address>
 
@@ -72,8 +72,10 @@ const phone: PhoneConfig = {
                         <li>
                             <a
                                 href={href}
-                                class="w-4 h-4 flex items-center justify-center text-dark hover:text-primary focus:outline-none focus:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-all"
+                                class="w-4 h-4 flex items-center justify-center text-dark hover:text-primary focus:outline-none focus:text-primary focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-all hover:scale-110"
                                 aria-label={label}
+                                target="_blank"
+                                rel="noopener noreferrer"
                             >
                                 <i class={icon} aria-hidden="true" />
                             </a>
@@ -84,73 +86,68 @@ const phone: PhoneConfig = {
         </div>
     </div>
 
-    <hr
-        class="hidden sm:block w-full h-px bg-divider border-0"
-        role="separator"
-        aria-hidden="true"
-    />
-
     <!-- Navigation wrapper -->
-    <div class="bg-white w-full" id="sticky-nav">
-        <!-- Main navigation -->
-        <div class="w-full flex justify-center py-4">
-            <div class="w-full max-w-[1296px] px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-row justify-between items-center">
-                    <!-- Logo -->
-                    <a
-                        href="/"
-                        class="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-lg transition-all"
-                        aria-label="Plumby - Home"
+    <nav 
+        class="bg-white w-full py-4" 
+        id="sticky-nav"
+        aria-label="Main navigation"
+    >
+        <div class="w-full max-w-[1296px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-row justify-between items-center">
+                <!-- Logo -->
+                <a
+                    href="/"
+                    class="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-lg transition-all group"
+                    aria-label="Plumby - Home"
+                >
+                    <span
+                        class="flex items-center text-[38px] text-primary group-hover:scale-110 transition-transform"
+                        aria-hidden="true"
                     >
-                        <span
-                            class="flex items-center text-[38px] text-primary"
-                            aria-hidden="true"
-                        >
-                            <i class="fas fa-faucet"></i>
-                        </span>
-                        <span class="text-[28px] font-bold text-dark">Plumby</span>
-                    </a>
+                        <i class="fas fa-faucet"></i>
+                    </span>
+                    <span class="text-[28px] font-bold text-dark group-hover:text-primary transition-colors">Plumby</span>
+                </a>
 
-                    <!-- Desktop Navigation -->
-                    <nav class="hidden lg:block">
-                        <ul class="flex items-center gap-[50px] list-none" role="list">
-                            {
-                                navItems.map(({ href, text, isCurrent }) => (
-                                    <li>
-                                        <a
-                                            href={href}
-                                            class={`text-base font-medium leading-6 transition-all hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded px-2 py-1 ${
-                                                isCurrent ? "text-primary" : "text-dark"
-                                            }`}
-                                            aria-current={isCurrent ? "page" : undefined}
-                                        >
-                                            {text}
-                                        </a>
-                                    </li>
-                                ))
-                            }
-                        </ul>
-                    </nav>
-
-                    <!-- Mobile menu button -->
-                    <button
-                        type="button"
-                        class="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-dark hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-all"
-                        aria-controls="mobile-menu"
-                        aria-expanded="false"
-                        id="mobile-menu-button"
-                    >
-                        <span class="sr-only">Open main menu</span>
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:block">
+                    <ul class="flex items-center gap-[50px] list-none" role="list">
+                        {
+                            navItems.map(({ href, text, isCurrent }) => (
+                                <li>
+                                    <a
+                                        href={href}
+                                        class={`relative text-base font-medium leading-6 transition-all hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded px-2 py-1 ${
+                                            isCurrent ? "text-primary after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary" : "text-dark"
+                                        }`}
+                                        aria-current={isCurrent ? "page" : undefined}
+                                    >
+                                        {text}
+                                    </a>
+                                </li>
+                            ))
+                        }
+                    </ul>
                 </div>
+
+                <!-- Mobile menu button -->
+                <button
+                    type="button"
+                    class="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-dark hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-all hover:bg-gray-100"
+                    aria-controls="mobile-menu"
+                    aria-expanded="false"
+                    id="mobile-menu-button"
+                >
+                    <span class="sr-only">Open main menu</span>
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
             </div>
         </div>
 
         <!-- Mobile menu -->
         <div
             id="mobile-menu"
-            class="lg:hidden"
+            class="lg:hidden absolute top-full left-0 w-full bg-white shadow-lg transform transition-transform duration-200 ease-in-out"
             aria-labelledby="mobile-menu-button"
             hidden
         >
@@ -161,8 +158,8 @@ const phone: PhoneConfig = {
                             <li>
                                 <a
                                     href={href}
-                                    class={`block w-full text-base font-medium leading-6 transition-all hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded px-2 py-1 ${
-                                        isCurrent ? "text-primary" : "text-dark"
+                                    class={`block w-full text-base font-medium leading-6 transition-all hover:text-primary hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded px-4 py-2 ${
+                                        isCurrent ? "text-primary bg-gray-50" : "text-dark"
                                     }`}
                                     aria-current={isCurrent ? "page" : undefined}
                                 >
@@ -174,8 +171,41 @@ const phone: PhoneConfig = {
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
 </header>
+
+<style>
+    :root {
+        --header-height-mobile: 96px;
+        --header-height-desktop: 96px;
+    }
+
+    @keyframes slideDown {
+        from {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .animate-slideDown {
+        animation: slideDown 0.5s ease-out forwards;
+    }
+
+    /* Add padding to body to prevent content from being hidden under fixed header */
+    :global(body) {
+        padding-top: var(--header-height-mobile);
+    }
+
+    @media (min-width: 768px) {
+        :global(body) {
+            padding-top: var(--header-height-desktop);
+        }
+    }
+</style>
 
 <script>
     // Types for TypeScript
@@ -192,18 +222,34 @@ const phone: PhoneConfig = {
 
         if (!elements.button || !elements.menu) return;
 
+        // Toggle menu
+        const toggleMenu = (show: boolean) => {
+            elements.button.setAttribute('aria-expanded', show.toString());
+            elements.menu.hidden = !show;
+            elements.menu.style.transform = show ? 'translateY(0)' : 'translateY(-10px)';
+            elements.menu.style.opacity = show ? '1' : '0';
+        };
+
         elements.button.addEventListener('click', () => {
             const isExpanded = elements.button.getAttribute('aria-expanded') === 'true';
-            elements.button.setAttribute('aria-expanded', (!isExpanded).toString());
-            elements.menu.hidden = isExpanded;
+            toggleMenu(!isExpanded);
         });
 
         // Close menu on escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && elements.button.getAttribute('aria-expanded') === 'true') {
-                elements.button.setAttribute('aria-expanded', 'false');
-                elements.menu.hidden = true;
+                toggleMenu(false);
                 elements.button.focus();
+            }
+        });
+
+        // Close menu on click outside
+        document.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+            if (!elements.menu.contains(target) && !elements.button.contains(target)) {
+                if (elements.button.getAttribute('aria-expanded') === 'true') {
+                    toggleMenu(false);
+                }
             }
         });
 
@@ -229,5 +275,13 @@ const phone: PhoneConfig = {
                 }
             }
         });
+
+        // Cleanup
+        return () => {
+            elements.button.removeEventListener('click', () => {});
+            document.removeEventListener('keydown', () => {});
+            document.removeEventListener('click', () => {});
+            elements.menu.removeEventListener('keydown', () => {});
+        };
     });
 </script>
