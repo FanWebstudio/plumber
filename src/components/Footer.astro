@@ -1,10 +1,19 @@
 ---
-const phoneNumber = "+1 271 281 9795";
-const email = "info@plumby.co";
-const address = "425 1st Street, San Francisco, California, USA";
-const workHours = "Monday - Friday, 9am - 6pm; Sunday closed";
+interface FooterLink {
+  name: string;
+  link: string;
+}
 
-const navPages = [
+// Contact information
+const contactInfo = {
+  phone: "+1 271 281 9795",
+  email: "info@plumby.co",
+  address: "425 1st Street, San Francisco, California, USA",
+  workHours: "Monday - Friday, 9am - 6pm; Sunday closed"
+} as const;
+
+// Navigation links
+const navPages: FooterLink[] = [
   { name: "About us", link: "/about" },
   { name: "Services", link: "/services" },
   { name: "Contact", link: "/contact" },
@@ -15,29 +24,38 @@ const navPages = [
 const marqueeText = "CALL US TODAY";
 const marqueeRepeats = 4;
 const marqueeContent = Array(marqueeRepeats).fill(marqueeText).map(text => 
-  `${text} <i class="fas fa-droplet text-[#171A1F] mx-8"></i>`
+  `${text} <i class="fas fa-droplet text-[#171A1F] mx-8" aria-hidden="true"></i>`
 ).join(' ');
+
+// Utility function for phone number formatting
+const formatPhoneLink = (phone: string) => phone.replace(/\s/g, '');
 ---
 
-<div class="w-full bg-[#FFD234] overflow-hidden">
+{/* Marquee Banner */}
+<div class="w-full bg-[#FFD234] overflow-hidden" aria-label="Announcement Banner">
   <div class="relative flex overflow-x-hidden">
     <div class="animate-marquee whitespace-nowrap py-8">
       <span class="mx-4 text-[48px] font-satoshi font-bold text-[#171A1F] tracking-tight" set:html={marqueeContent} />
     </div>
-    <div class="absolute top-0 animate-marquee2 whitespace-nowrap py-8">
+    <div class="absolute top-0 animate-marquee2 whitespace-nowrap py-8" aria-hidden="true">
       <span class="mx-4 text-[48px] font-satoshi font-bold text-[#171A1F] tracking-tight" set:html={marqueeContent} />
     </div>
   </div>
 </div>
 
-<footer class="bg-[#171A1F] text-white py-24">
+{/* Main Footer */}
+<footer class="bg-[#171A1F] text-white py-24" aria-label="Site Footer">
   <div class="container mx-auto max-w-7xl px-4">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-x-24 gap-y-12">
       {/* Brand Section */}
       <div class="space-y-8">
-        <a href="/" class="inline-block">
+        <a 
+          href="/" 
+          class="inline-block hover:opacity-80 transition-opacity"
+          aria-label="Go to homepage"
+        >
           <div class="flex items-center gap-2">
-            <img src="/images/logo.svg" alt="Plumby Logo" class="w-8 h-8" />
+            <img src="/images/logo.svg" alt="" class="w-8 h-8" />
             <span class="text-2xl font-satoshi font-bold">plumby</span>
           </div>
         </a>
@@ -48,81 +66,84 @@ const marqueeContent = Array(marqueeRepeats).fill(marqueeText).map(text =>
           </p>
           
           <p class="text-sm">
-            2023 Plumby. All rights reserved.
+            &copy; 2023 Plumby. All rights reserved.
           </p>
         </div>
       </div>
 
-      {/* Pages */}
-      <div class="space-y-8">
-        <h4 class="text-white text-sm font-semibold">Pages</h4>
-        <nav class="flex flex-col space-y-4">
+      {/* Pages Navigation */}
+      <nav class="space-y-8" aria-label="Footer Navigation">
+        <h2 class="text-white text-sm font-semibold">Pages</h2>
+        <ul class="flex flex-col space-y-4">
           {navPages.map((page) => (
-            <a 
-              href={page.link} 
-              class="text-[#F7F9FB] text-sm hover:text-[#1681FF] transition-colors"
-            >
-              {page.name}
-            </a>
+            <li>
+              <a 
+                href={page.link} 
+                class="text-[#F7F9FB] text-sm hover:text-[#1681FF] transition-colors"
+              >
+                {page.name}
+              </a>
+            </li>
           ))}
-        </nav>
-      </div>
+        </ul>
+      </nav>
 
       {/* Company Info */}
       <div class="space-y-8">
-        <h4 class="text-white text-sm font-semibold">Company Info</h4>
+        <h2 class="text-white text-sm font-semibold">Company Info</h2>
         <div class="space-y-6">
-          <a href={`tel:${phoneNumber.replace(/\s/g, '')}`} class="flex items-center gap-4 text-[#F7F9FB] text-sm group">
-            <i class="fas fa-phone text-[#7F8995] group-hover:text-[#1681FF] transition-colors"></i>
-            <span>Call Us: {phoneNumber}</span>
+          <a 
+            href={`tel:${formatPhoneLink(contactInfo.phone)}`} 
+            class="flex items-center gap-4 text-[#F7F9FB] text-sm group"
+            aria-label={`Call us at ${contactInfo.phone}`}
+          >
+            <i class="fas fa-phone text-[#7F8995] group-hover:text-[#1681FF] transition-colors" aria-hidden="true"></i>
+            <span>Call Us: {contactInfo.phone}</span>
           </a>
           
-          <a href={`mailto:${email}`} class="flex items-center gap-4 text-[#F7F9FB] text-sm group">
-            <i class="fas fa-envelope text-[#7F8995] group-hover:text-[#1681FF] transition-colors"></i>
-            <span>{email}</span>
+          <a 
+            href={`mailto:${contactInfo.email}`} 
+            class="flex items-center gap-4 text-[#F7F9FB] text-sm group"
+            aria-label={`Email us at ${contactInfo.email}`}
+          >
+            <i class="fas fa-envelope text-[#7F8995] group-hover:text-[#1681FF] transition-colors" aria-hidden="true"></i>
+            <span>{contactInfo.email}</span>
           </a>
         </div>
       </div>
 
       {/* Address Info */}
-      <div class="space-y-8">
+      <address class="space-y-8 not-italic">
         <div class="space-y-6">
           <div class="flex items-start gap-4 text-[#F7F9FB] text-sm">
-            <i class="fas fa-location-dot text-[#7F8995] mt-1"></i>
-            <span>{address}</span>
+            <i class="fas fa-location-dot text-[#7F8995] mt-1" aria-hidden="true"></i>
+            <span>{contactInfo.address}</span>
           </div>
           
           <div class="flex items-start gap-4 text-[#F7F9FB] text-sm">
-            <i class="fas fa-clock text-[#7F8995] mt-1"></i>
-            <span>{workHours}</span>
+            <i class="fas fa-clock text-[#7F8995] mt-1" aria-hidden="true"></i>
+            <span>{contactInfo.workHours}</span>
           </div>
         </div>
-      </div>
+      </address>
     </div>
   </div>
 </footer>
 
 <style>
   @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
   }
 
   @keyframes marquee2 {
-    0% {
-      transform: translateX(100%);
-    }
-    100% {
-      transform: translateX(0);
-    }
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0); }
   }
 
   .animate-marquee {
     animation: marquee 25s linear infinite;
+    animation-delay: -25s;
   }
 
   .animate-marquee2 {
