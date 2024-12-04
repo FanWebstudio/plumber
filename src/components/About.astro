@@ -1,29 +1,54 @@
 ---
+import { Image } from "astro:assets";
+
 interface Feature {
     title: string;
     icon: string;
 }
 
-const leftFeatures: Feature[] = [
+interface ImageAsset {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+}
+
+const features: Feature[] = [
     { title: "Experienced Plumbers", icon: "fas fa-check" },
     { title: "Competitive Pricing", icon: "fas fa-check" },
     { title: "Eco-Friendly Options", icon: "fas fa-check" },
-];
-
-const rightFeatures: Feature[] = [
     { title: "24/7 Emergency Service", icon: "fas fa-check" },
     { title: "Customer Satisfaction Guarantee", icon: "fas fa-check" },
     { title: "Transparent Communication", icon: "fas fa-check" },
 ];
+
+const mainImage: ImageAsset = {
+    src: "https://i.imgur.com/5FyHXE2.png",
+    alt: "Professional plumber working on pipes, showcasing our expertise and attention to detail",
+    width: 494,
+    height: 584
+};
+
+const qualityBadge: ImageAsset = {
+    src: "https://i.imgur.com/nZVvqvE.png",
+    alt: "Quality assurance badge",
+    width: 250,
+    height: 256
+};
 ---
 
-<section class="w-full py-16 sm:py-20 lg:py-[120px] bg-white" aria-labelledby="about-title">
+<section 
+    class="w-full py-16 sm:py-20 lg:py-[120px] bg-white" 
+    aria-labelledby="about-title"
+>
     <div class="w-full max-w-[1296px] mx-auto px-4 sm:px-6 lg:px-8">
         <div
             class="flex flex-col lg:flex-row gap-12 lg:gap-[152px] items-center"
         >
             <!-- Left content -->
-            <article class="w-full lg:w-[549px] flex flex-col gap-12 lg:gap-20">
+            <article 
+                class="w-full lg:w-[549px] flex flex-col gap-12 lg:gap-20 animate-fadeIn"
+            >
                 <!-- Text content -->
                 <header class="flex flex-col gap-4 sm:gap-6">
                     <h2
@@ -52,11 +77,13 @@ const rightFeatures: Feature[] = [
                         role="list"
                         aria-labelledby="features-title"
                     >
-                        <!-- Left features -->
-                        <ul class="flex flex-col gap-4 sm:gap-[15px] list-none">
-                            {
-                                leftFeatures.map((feature) => (
-                                    <li class="flex items-center gap-2">
+                        {/* Features grid */}
+                        {[0, 1].map((columnIndex) => (
+                            <ul class="flex flex-col gap-4 sm:gap-[15px] list-none">
+                                {features.slice(columnIndex * 3, (columnIndex + 1) * 3).map((feature) => (
+                                    <li 
+                                        class="flex items-center gap-2 transition-transform hover:translate-x-1 focus-within:translate-x-1"
+                                    >
                                         <span
                                             class="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex items-center justify-center"
                                             aria-hidden="true"
@@ -65,59 +92,51 @@ const rightFeatures: Feature[] = [
                                                 class={`${feature.icon} text-primary text-sm sm:text-base`}
                                             />
                                         </span>
-                                        <span class="text-dark text-sm sm:text-base font-medium leading-6">
-                                            {feature.title}
-                                        </span>
-                                    </li>
-                                ))
-                            }
-                        </ul>
-                        <!-- Right features -->
-                        <ul class="flex flex-col gap-4 sm:gap-[15px] list-none">
-                            {
-                                rightFeatures.map((feature) => (
-                                    <li class="flex items-center gap-2">
-                                        <span
-                                            class="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex items-center justify-center"
-                                            aria-hidden="true"
+                                        <span 
+                                            class="text-dark text-sm sm:text-base font-medium leading-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded"
+                                            tabindex="0"
                                         >
-                                            <i
-                                                class={`${feature.icon} text-primary text-sm sm:text-base`}
-                                            />
-                                        </span>
-                                        <span class="text-dark text-sm sm:text-base font-medium leading-6">
                                             {feature.title}
                                         </span>
                                     </li>
-                                ))
-                            }
-                        </ul>
+                                ))}
+                            </ul>
+                        ))}
                     </div>
                 </div>
             </article>
 
             <!-- Right image and badge -->
-            <figure class="w-full max-w-[400px] sm:max-w-[494px] lg:w-[494px] relative lg:ml-auto">
+            <figure 
+                class="w-full max-w-[400px] sm:max-w-[494px] lg:w-[494px] relative lg:ml-auto animate-fadeIn animation-delay-300"
+            >
                 <!-- Main image -->
                 <div
                     class="w-full aspect-[494/584] bg-gray-200 rounded-lg overflow-hidden"
                 >
                     <img
-                        src="https://i.imgur.com/5FyHXE2.png"
-                        alt="Professional plumber working on pipes, showcasing our expertise and attention to detail"
+                        src={mainImage.src}
+                        alt={mainImage.alt}
+                        width={mainImage.width}
+                        height={mainImage.height}
                         loading="lazy"
-                        class="w-full h-full object-cover"
+                        decoding="async"
+                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                     />
                 </div>
 
                 <!-- Quality badge -->
                 <div
-                    class="absolute left-[50%] bottom-[-90px] translate-x-[-50%] sm:left-[-60px] sm:bottom-auto sm:top-[50%] sm:translate-x-0 lg:left-[-90px] sm:translate-y-[-50%] w-[180px] h-[185px] sm:w-[220px] sm:h-[226px] lg:w-[250px] lg:h-[256px] transform sm:-rotate-30"
+                    class="absolute left-[50%] bottom-[-90px] translate-x-[-50%] sm:left-[-60px] sm:bottom-auto sm:top-[50%] sm:translate-x-0 lg:left-[-90px] sm:translate-y-[-50%] w-[180px] h-[185px] sm:w-[220px] sm:h-[226px] lg:w-[250px] lg:h-[256px] transform sm:-rotate-30 animate-float"
                     aria-hidden="true"
                 >
                     <img
-                        src="https://i.imgur.com/nZVvqvE.png"
+                        src={qualityBadge.src}
                         alt=""
+                        width={qualityBadge.width}
+                        height={qualityBadge.height}
+                        loading="lazy"
+                        decoding="async"
                         class="w-full h-full object-contain"
                         aria-hidden="true"
                     />
@@ -129,3 +148,37 @@ const rightFeatures: Feature[] = [
         </div>
     </div>
 </section>
+
+<style>
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0) rotate(-30deg);
+        }
+        50% {
+            transform: translateY(-10px) rotate(-30deg);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-fadeIn {
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    .animation-delay-300 {
+        animation-delay: 300ms;
+    }
+</style>
