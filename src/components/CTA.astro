@@ -4,74 +4,122 @@ interface PhoneConfig {
     formatted: string;
 }
 
+interface CTAContent {
+    title: string;
+    description: string;
+    bookButton: {
+        text: string;
+        href: string;
+    };
+    backgroundImage: string;
+}
+
 const phone: PhoneConfig = {
     number: "12712819795",
     formatted: "+1 271 281 9795"
 };
+
+const content: CTAContent = {
+    title: "Having a Plumbing Problem? We'll Fix it Today!",
+    description: "Whereby is the super simple way to connect over. No apps, downloads, or long meeting links.",
+    bookButton: {
+        text: "Book A Visiting",
+        href: "/book-visit"
+    },
+    backgroundImage: "/images/BG.png"
+};
 ---
 
-{
-  /* 
-  CTA Design System:
-  - Full-width section with max-width constraint
-  - Blue background with rounded corners
-  - Background image using Tailwind CSS
-  - Responsive typography and layout
-  - Clear, actionable call-to-action buttons
-*/
-}
 <section 
-  class="relative w-full max-w-[1532px] mx-auto px-4 sm:px-6 lg:px-8 mb-24"
+    class="relative w-full max-w-[1532px] mx-auto px-4 sm:px-6 lg:px-8 mb-24"
+    aria-labelledby="cta-headline"
 >
-  <div 
-    class="w-full bg-[#1681FF] rounded-2xl overflow-hidden bg-cover bg-center bg-blend-overlay relative"
-    style="background-image: url('/images/BG.png');"
-    role="img"
-    aria-label="Decorative plumbing background image"
-  >
-    {/* Content Container: Centered vertical layout */}
-    <div
-      class="relative z-10 w-full max-w-[642px] mx-auto py-16 md:py-32 flex flex-col items-center text-center px-6 sm:px-8 md:px-12"
+    <div 
+        class="w-full bg-[#1681FF] rounded-2xl overflow-hidden bg-cover bg-center bg-blend-overlay relative animate-fadeIn"
+        style={`background-image: url('${content.backgroundImage}');`}
+        role="presentation"
     >
-      {/* Headline and Subtext */}
-      <header class="px-4 space-y-6">
-        <h2
-          id="cta-headline"
-          class="text-3xl md:text-5xl font-satoshi font-bold leading-tight md:leading-[54px] text-white"
+        {/* Content Container: Centered vertical layout */}
+        <div
+            class="relative z-10 w-full max-w-[642px] mx-auto py-16 md:py-32 flex flex-col items-center text-center px-6 sm:px-8 md:px-12"
         >
-          Having a Plumbing Problem? We'll Fix it Today!
-        </h2>
-        <p
-          class="max-w-[388px] mx-auto text-base font-inter font-normal leading-relaxed text-white"
-        >
-          Whereby is the super simple way to connect over. No apps, downloads, or
-          long meeting links.
-        </p>
-      </header>
+            {/* Headline and Subtext */}
+            <header class="px-4 space-y-6 animate-slideUp">
+                <h2
+                    id="cta-headline"
+                    class="text-3xl md:text-5xl font-satoshi font-bold leading-tight md:leading-[54px] text-white"
+                >
+                    {content.title}
+                </h2>
+                <p
+                    class="max-w-[388px] mx-auto text-base font-inter font-normal leading-relaxed text-white"
+                >
+                    {content.description}
+                </p>
+            </header>
 
-      {/* Action Buttons: Responsive flex layout */}
-      <nav
-        class="mt-10 flex flex-col md:flex-row justify-center items-center gap-4 w-full px-6 sm:px-8 md:px-12"
-      >
-        {/* Book Visit Button */}
-        <a
-          href="/book-visit"
-          class="w-full md:w-auto px-5 py-5 bg-white rounded-lg text-[#171A1F] font-inter text-base font-semibold leading-6 transition-all hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 text-center"
-          aria-label="Book a plumbing visit"
-        >
-          Book A Visiting
-        </a>
+            {/* Action Buttons: Responsive flex layout */}
+            <nav
+                class="mt-10 flex flex-col md:flex-row justify-center items-center gap-4 w-full px-6 sm:px-8 md:px-12 animate-slideUp animation-delay-200"
+                aria-label="Call to action navigation"
+            >
+                {/* Book Visit Button */}
+                <a
+                    href={content.bookButton.href}
+                    class="group w-full md:w-auto px-5 py-5 bg-white rounded-lg text-[#171A1F] font-inter text-base font-semibold leading-6 transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 text-center relative overflow-hidden"
+                    aria-label="Book a plumbing visit"
+                >
+                    <span class="relative z-10">{content.bookButton.text}</span>
+                    <div class="absolute inset-0 bg-gray-100 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+                </a>
 
-        {/* Call Button with Phone Icon */}
-        <a
-          href={`tel:${phone.number}`}
-          class="w-full md:w-auto px-5 py-5 bg-[#FFD234] rounded-lg text-[#171A1F] font-inter text-base font-semibold leading-6 transition-all hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#FFD234] focus:ring-offset-2 flex items-center justify-center gap-2.5"
-          aria-label="Call our plumbing service"
-        >
-          <i class="fas fa-phone mr-2" aria-hidden="true"></i>
-          Call us: {phone.formatted}
-        </a>
-      </nav>
+                {/* Call Button with Phone Icon */}
+                <a
+                    href={`tel:${phone.number}`}
+                    class="group w-full md:w-auto px-5 py-5 bg-[#FFD234] rounded-lg text-[#171A1F] font-inter text-base font-semibold leading-6 transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#FFD234] focus:ring-offset-2 flex items-center justify-center gap-2.5 relative overflow-hidden"
+                    aria-label={`Call our plumbing service at ${phone.formatted}`}
+                >
+                    <span class="relative z-10 flex items-center gap-2.5">
+                        <i class="fas fa-phone" aria-hidden="true"></i>
+                        <span>Call us: {phone.formatted}</span>
+                    </span>
+                    <div class="absolute inset-0 bg-[#FFE067] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+                </a>
+            </nav>
+        </div>
     </div>
-  </div>
 </section>
+
+<style>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fadeIn {
+        animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    .animate-slideUp {
+        animation: slideUp 0.6s ease-out forwards;
+    }
+
+    .animation-delay-200 {
+        animation-delay: 200ms;
+    }
+</style>
