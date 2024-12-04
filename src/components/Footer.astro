@@ -4,13 +4,27 @@ interface FooterLink {
   link: string;
 }
 
+interface ContactInfo {
+  phone: string;
+  email: string;
+  address: string;
+  workHours: string;
+}
+
+interface SocialLink {
+  platform: string;
+  url: string;
+  icon: string;
+  label: string;
+}
+
 // Contact information
-const contactInfo = {
+const contactInfo: ContactInfo = {
   phone: "+1 271 281 9795",
   email: "info@plumby.co",
   address: "425 1st Street, San Francisco, California, USA",
   workHours: "Monday - Friday, 9am - 6pm; Sunday closed"
-} as const;
+};
 
 // Navigation links
 const navPages: FooterLink[] = [
@@ -20,6 +34,28 @@ const navPages: FooterLink[] = [
   { name: "Blog", link: "/blog" }
 ];
 
+// Social media links
+const socialLinks: SocialLink[] = [
+  { 
+    platform: "Facebook",
+    url: "https://facebook.com/plumby",
+    icon: "fa-facebook",
+    label: "Follow us on Facebook"
+  },
+  { 
+    platform: "Twitter",
+    url: "https://twitter.com/plumby",
+    icon: "fa-twitter",
+    label: "Follow us on Twitter"
+  },
+  { 
+    platform: "Instagram",
+    url: "https://instagram.com/plumby",
+    icon: "fa-instagram",
+    label: "Follow us on Instagram"
+  }
+];
+
 // Marquee configuration
 const marqueeText = "CALL US TODAY";
 const marqueeRepeats = 4;
@@ -27,12 +63,16 @@ const marqueeContent = Array(marqueeRepeats).fill(marqueeText).map(text =>
   `${text} <i class="fas fa-droplet text-[#171A1F] mx-8" aria-hidden="true"></i>`
 ).join(' ');
 
-// Utility function for phone number formatting
+// Utility functions
 const formatPhoneLink = (phone: string) => phone.replace(/\s/g, '');
+const currentYear = new Date().getFullYear();
 ---
 
 {/* Marquee Banner */}
-<div class="w-full bg-[#FFD234] overflow-hidden" aria-label="Announcement Banner">
+<div 
+  class="w-full bg-[#FFD234] overflow-hidden animate-fadeIn"
+  aria-label="Announcement Banner"
+>
   <div class="relative flex overflow-x-hidden">
     <div class="animate-marquee whitespace-nowrap py-8">
       <span class="mx-4 text-[48px] font-satoshi font-bold text-[#171A1F] tracking-tight" set:html={marqueeContent} />
@@ -44,18 +84,21 @@ const formatPhoneLink = (phone: string) => phone.replace(/\s/g, '');
 </div>
 
 {/* Main Footer */}
-<footer class="bg-[#171A1F] text-white py-24" aria-label="Site Footer">
+<footer 
+  class="bg-[#171A1F] text-white py-24 animate-fadeIn animation-delay-200" 
+  aria-label="Site Footer"
+>
   <div class="container mx-auto max-w-7xl px-4">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-x-24 gap-y-12">
       {/* Brand Section */}
       <div class="space-y-8">
         <a 
           href="/" 
-          class="inline-block hover:opacity-80 transition-opacity"
-          aria-label="Go to homepage"
+          class="inline-block transition-transform hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1681FF] rounded-lg"
+          aria-label="Plumby - Go to homepage"
         >
           <div class="flex items-center gap-2">
-            <img src="/images/logo.svg" alt="" class="w-8 h-8" />
+            <img src="/images/logo.svg" alt="" width="32" height="32" class="w-8 h-8" />
             <span class="text-2xl font-satoshi font-bold">plumby</span>
           </div>
         </a>
@@ -66,22 +109,39 @@ const formatPhoneLink = (phone: string) => phone.replace(/\s/g, '');
           </p>
           
           <p class="text-sm">
-            &copy; 2023 Plumby. All rights reserved.
+            &copy; {currentYear} Plumby. All rights reserved.
           </p>
         </div>
+
+        {/* Social Links */}
+        <nav class="flex gap-4" aria-label="Social Media Links">
+          {socialLinks.map(({ url, icon, label }) => (
+            <a
+              href={url}
+              class="text-[#7F8995] hover:text-[#1681FF] transition-colors p-2 hover:scale-110 transform duration-200"
+              aria-label={label}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class={`fab ${icon}`} aria-hidden="true"></i>
+            </a>
+          ))}
+        </nav>
       </div>
 
       {/* Pages Navigation */}
       <nav class="space-y-8" aria-label="Footer Navigation">
         <h2 class="text-white text-sm font-semibold">Pages</h2>
-        <ul class="flex flex-col space-y-4">
+        <ul class="flex flex-col space-y-4" role="list">
           {navPages.map((page) => (
             <li>
               <a 
                 href={page.link} 
-                class="text-[#F7F9FB] text-sm hover:text-[#1681FF] transition-colors"
+                class="text-[#F7F9FB] text-sm group inline-flex items-center hover:text-[#1681FF] transition-all"
               >
-                {page.name}
+                <span class="group-hover:translate-x-1 transition-transform">
+                  {page.name}
+                </span>
               </a>
             </li>
           ))}
@@ -94,35 +154,44 @@ const formatPhoneLink = (phone: string) => phone.replace(/\s/g, '');
         <div class="space-y-6">
           <a 
             href={`tel:${formatPhoneLink(contactInfo.phone)}`} 
-            class="flex items-center gap-4 text-[#F7F9FB] text-sm group"
+            class="flex items-center gap-4 text-[#F7F9FB] text-sm group hover:text-[#1681FF] transition-colors"
             aria-label={`Call us at ${contactInfo.phone}`}
           >
             <i class="fas fa-phone text-[#7F8995] group-hover:text-[#1681FF] transition-colors" aria-hidden="true"></i>
-            <span>Call Us: {contactInfo.phone}</span>
+            <span class="group-hover:translate-x-1 transition-transform">
+              Call Us: {contactInfo.phone}
+            </span>
           </a>
           
           <a 
             href={`mailto:${contactInfo.email}`} 
-            class="flex items-center gap-4 text-[#F7F9FB] text-sm group"
+            class="flex items-center gap-4 text-[#F7F9FB] text-sm group hover:text-[#1681FF] transition-colors"
             aria-label={`Email us at ${contactInfo.email}`}
           >
             <i class="fas fa-envelope text-[#7F8995] group-hover:text-[#1681FF] transition-colors" aria-hidden="true"></i>
-            <span>{contactInfo.email}</span>
+            <span class="group-hover:translate-x-1 transition-transform">
+              {contactInfo.email}
+            </span>
           </a>
         </div>
       </div>
 
       {/* Address Info */}
       <address class="space-y-8 not-italic">
+        <h2 class="text-white text-sm font-semibold">Location & Hours</h2>
         <div class="space-y-6">
-          <div class="flex items-start gap-4 text-[#F7F9FB] text-sm">
-            <i class="fas fa-location-dot text-[#7F8995] mt-1" aria-hidden="true"></i>
-            <span>{contactInfo.address}</span>
+          <div class="flex items-start gap-4 text-[#F7F9FB] text-sm group">
+            <i class="fas fa-location-dot text-[#7F8995] mt-1 group-hover:text-[#1681FF] transition-colors" aria-hidden="true"></i>
+            <span class="group-hover:text-[#1681FF] transition-colors">
+              {contactInfo.address}
+            </span>
           </div>
           
-          <div class="flex items-start gap-4 text-[#F7F9FB] text-sm">
-            <i class="fas fa-clock text-[#7F8995] mt-1" aria-hidden="true"></i>
-            <span>{contactInfo.workHours}</span>
+          <div class="flex items-start gap-4 text-[#F7F9FB] text-sm group">
+            <i class="fas fa-clock text-[#7F8995] mt-1 group-hover:text-[#1681FF] transition-colors" aria-hidden="true"></i>
+            <span class="group-hover:text-[#1681FF] transition-colors">
+              {contactInfo.workHours}
+            </span>
           </div>
         </div>
       </address>
@@ -131,6 +200,17 @@ const formatPhoneLink = (phone: string) => phone.replace(/\s/g, '');
 </footer>
 
 <style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @keyframes marquee {
     0% { transform: translateX(0); }
     100% { transform: translateX(-100%); }
@@ -139,6 +219,14 @@ const formatPhoneLink = (phone: string) => phone.replace(/\s/g, '');
   @keyframes marquee2 {
     0% { transform: translateX(100%); }
     100% { transform: translateX(0); }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
   }
 
   .animate-marquee {
